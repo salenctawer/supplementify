@@ -1,12 +1,13 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './Home.module.css'
 import { Button } from '@mui/material'
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation'
 
 const Home: FC = () => {
     const router = useRouter()
+    const params = useParams()
     const CLIENT_ID = 'c69ebf590d0b4933b559ed709416fb39'
     const CLIENT_SECRET_ID = '7900247b5f904ee9a4e8822ddfb5bdbf'
     const REDIRECT_URI = 'http://localhost:3000'
@@ -17,6 +18,20 @@ const Home: FC = () => {
     const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER)
 
     const loginLink = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES_URL_PARAM}&show_dialog=true`
+
+    useEffect(() => {
+        if(window.location.hash) {
+            const parsedHash = new URLSearchParams(window.location.hash)
+            const accessToken = parsedHash.get('#access_token') ?? ''
+            const tokenType = parsedHash.get('token_type') ?? ''
+            const expiresIn = parsedHash.get('expires_in') ?? ''
+
+            localStorage.clear()
+            localStorage.setItem('accessToken', accessToken)
+            localStorage.setItem('tokenType', tokenType)
+            localStorage.setItem('expiresIn', expiresIn)
+        }
+    }, [])
 
     const handleLogin = () => {
         return router.push(loginLink)
