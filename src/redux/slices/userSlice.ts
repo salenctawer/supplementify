@@ -1,20 +1,34 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { spotifyApi } from '@/api/api'
 
-export const fetchPlaylists = createAsyncThunk('/user/playlists', async(params) => {
+export const fetchPlaylists = createAsyncThunk('/user/playlists', async() => {
     const {data} = await spotifyApi.fetchPlaylists()
     return data
 })
 
 const initialState = {
-    data: [] as any,
+    playlistsData: [] as any, //типизировать
     status: 'loading'
 }
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
     name: 'user',
     initialState,
+    reducers: {},
     extraReducers: (builder) => {
-        
+        builder.addCase(fetchPlaylists.pending, (state) => {
+            state.playlistsData = []
+            state.status = 'loading'
+        })
+        builder.addCase(fetchPlaylists.rejected, (state) => {
+            state.playlistsData = []
+            state.status = 'error'
+        })
+        builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
+            state.playlistsData = action.payload
+            state.status = 'loaded'
+        }) 
     }
 })
+
+export default userSlice.reducer
