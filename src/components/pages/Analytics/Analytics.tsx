@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const Analytics: FC = () => {
     const requestStatus = useAppSelector(state => state.user.status)
+    const userPlaylists = useAppSelector(state => state.user.playlistsData)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
