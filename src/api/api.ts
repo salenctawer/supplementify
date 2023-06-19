@@ -13,6 +13,6 @@ export const spotifyApi = {
 }
 
 instance.interceptors.request.use((config: any) => { //типизировать
-    config.headers.Authorization = window.localStorage.getItem('accessToken');
+    config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
     return config;
 })

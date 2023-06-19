@@ -2,10 +2,12 @@
 
 import { FC, useEffect } from "react";
 import { fetchPlaylists } from "@/redux/slices/userSlice";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const Analytics: FC = () => {
     const requestStatus = useAppSelector(state => state.user.status)
+    const dispatch = useAppDispatch()
+
     useEffect(() => {
         if(window.location.hash) {
             const parsedHash = new URLSearchParams(window.location.hash)
@@ -17,7 +19,8 @@ const Analytics: FC = () => {
             localStorage.setItem('accessToken', accessToken)
             localStorage.setItem('tokenType', tokenType)
             localStorage.setItem('expiresIn', expiresIn)
-            fetchPlaylists()
+            console.log(fetchPlaylists)
+            dispatch(fetchPlaylists())
         }
     }, [])
 
