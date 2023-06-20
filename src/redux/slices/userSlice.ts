@@ -6,6 +6,16 @@ export const fetchPlaylists = createAsyncThunk('/user/playlists', async() => {
     return data
 })
 
+export interface FetchFavoriteTracksParamsData {
+    limit: number
+    timeRange: string
+}
+
+export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', async(params: FetchFavoriteTracksParamsData) => {
+    const { data } = await spotifyApi.fetchFavoriteTracks(params.limit, params.timeRange)
+    return data
+})
+
 const initialState = {
     playlistsData: [] as any, //типизировать
     status: 'loading'

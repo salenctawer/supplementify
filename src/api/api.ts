@@ -5,10 +5,19 @@ const instance = axios.create({
 })
 
 const PLAYLISTS_ENDPOINT = 'v1/me/playlists'
+const FAVORITE_TRACKS_ENDPOINT = 'v1/me/top/tracks'
 
 export const spotifyApi = {
     fetchPlaylists() {
         return instance.get(PLAYLISTS_ENDPOINT)
+    },
+    fetchFavoriteTracks(limit: number, timeRange: string) {
+        return instance.get(FAVORITE_TRACKS_ENDPOINT, {
+            params: {
+                limit,
+                time_range: timeRange
+            }
+        })
     }
 }
 
