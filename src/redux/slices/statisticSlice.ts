@@ -20,11 +20,11 @@ export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', asyn
 const initialState = {
     playlistsData: [] as SpotifyPlaylistsData[],
     favoriteTracksData: [] as SpotifyFavoriteTracksData[],
-    status: 'loading'
+    status: 'loading',
 }
 
-export const userSlice = createSlice({
-    name: 'user',
+const statisticSlice = createSlice({
+    name: 'statistic',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -39,8 +39,20 @@ export const userSlice = createSlice({
         builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
             state.playlistsData = action.payload
             state.status = 'loaded'
-        }) 
+        })
+        builder.addCase(fetchFavoriteTracks.pending, (state) => {
+            state.favoriteTracksData = []
+            state.status = 'loading'
+        })
+        builder.addCase(fetchFavoriteTracks.rejected, (state) => {
+            state.favoriteTracksData = []
+            state.status = 'error'
+        })
+        builder.addCase(fetchFavoriteTracks.fulfilled, (state, action) => {
+            state.favoriteTracksData = action.payload
+            state.status = 'loaded'
+        })  
     }
 })
 
-export default userSlice.reducer
+export default statisticSlice.reducer

@@ -13,7 +13,7 @@ const Home: FC = () => {
     const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
     const RESPONSE_TYPE = 'token'
     const SPACE_DELIMITER = '%20'
-    const SCOPES = ["user-read-currently-playing", "user-read-playback-state"]
+    const SCOPES = ["user-top-read user-read-recently-played user-follow-read user-follow-modify user-library-read user-library-modify"]
     const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER)
 
     const loginLink = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES_URL_PARAM}&show_dialog=true`

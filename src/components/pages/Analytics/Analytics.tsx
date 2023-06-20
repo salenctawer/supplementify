@@ -1,14 +1,14 @@
 'use client'
 
 import { FC, useEffect } from "react";
-import { fetchPlaylists } from "@/redux/slices/userSlice";
+import { fetchPlaylists } from "@/redux/slices/statisticSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from 'next/navigation'
 
 const Analytics: FC = () => {
     const router = useRouter()
-    const requestStatus = useAppSelector(state => state.user.status)
-    const userPlaylists = useAppSelector(state => state.user.playlistsData)
+    const requestStatus = useAppSelector(state => state.statistic.status)
+    const userPlaylists = useAppSelector(state => state.statistic.playlistsData)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
