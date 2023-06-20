@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { spotifyApi } from '@/api/api'
+import { SpotifyFavoriteTracksData, SpotifyPlaylistsData } from "@/types/SpotifyData";
 
 export const fetchPlaylists = createAsyncThunk('/user/playlists', async() => {
     const {data} = await spotifyApi.fetchPlaylists()
@@ -17,7 +18,8 @@ export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', asyn
 })
 
 const initialState = {
-    playlistsData: [] as any, //типизировать
+    playlistsData: [] as SpotifyPlaylistsData[],
+    favoriteTracksData: [] as SpotifyFavoriteTracksData[],
     status: 'loading'
 }
 

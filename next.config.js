@@ -9,7 +9,7 @@ const nextConfig = {
             }, 
             {
                 source: '/favorite-artists',
-                destination: 'favorite-artists/short-term',
+                destination: '/favorite-artists/short-term',
                 permanent: true,
             }
         ]
