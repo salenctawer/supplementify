@@ -3,6 +3,8 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Providers } from "@/redux/provider";
 
+import { AppSidebar } from '@/components/app/AppSidebar/AppSidebar';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -18,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <AppSidebar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

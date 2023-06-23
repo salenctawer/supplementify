@@ -12,7 +12,7 @@ export const Login: FC = () => {
     const accessToken = useAppSelector(state => state.user.accessToken)
     
     useEffect(() => {
-        if(accessToken) {
+        if(accessToken) { //сделать хук useAuth и вынести всю логику туда
             return router.push('/')
         }
 
