@@ -1,53 +1,62 @@
 import { createSlice } from "@reduxjs/toolkit"
+import * as MuiIcons from '@mui/icons-material'
+
+export type Icon = keyof typeof MuiIcons
+
+export interface SidebarTabItemData {
+    name: string
+    routeName?: string
+    icon: Icon,
+}
 
 const initialState = {
     sidebarAuthTabs: [
         {
             name: 'Home',
             routeName: '/',
-            needAuth: false,
+            icon: 'HomeOutlined',
         },
         {
             name: 'Favorite Tracks',
             routeName: '/favorite-tracks/short-term',
-            needAuth: true,
+            icon: 'AudiotrackOutlined',
         }, 
         {
             name: 'Favorite Artists',
             routeName: '/favorite-artists/short-term',
-            needAuth: true,
+            icon: 'PersonOutlined',
         },
         {
             name: 'Recently Played',
             routeName: '/recents',
-            needAuth: true,
+            icon: 'HeadphonesOutlined',
         },
         {
             name: 'Light Mode',
-            needAuth: false
+            icon: 'PersonOutlined',
         }, 
         {
             name: 'Logout',
             routeName: '/logout',
-            needAuth: true,
+            icon: 'LogoutOutlined',
         },
-    ], 
+    ] as SidebarTabItemData[], 
     sidebarNonAuthTabs: [
         {
             name: 'Home',
             routeName: '/',
-            needAuth: false,
+            icon: 'HomeOutlined',
         },
         {
             name: 'Light Mode',
-            needAuth: false
+            icon: 'PersonOutlined',
         }, 
         {
             name: 'Login',
             routeName: '/login',
-            needAuth: false,
+            icon: 'LoginOutlined'
         },
-    ]
+    ] as SidebarTabItemData[]
 }
 
 const sidebarSlice = createSlice({
