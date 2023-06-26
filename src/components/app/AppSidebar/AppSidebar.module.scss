@@ -1,16 +1,40 @@
-@import 'assets/scss/app';
+// @import 'assets/scss/app';
+//TODO: вынести в variables цвета и размер шрифта
 
 .sidebar {
     position: fixed;
-    background: $color-gray;
+    background: #1D1C21;
+    border-radius: 16px;
+    top: 60px;
+    left: 60px;
+    padding: 16px;
+    transition: .3s ease all;
+
+    &:hover {
+        .itemText {
+            display: block;
+        }
+    }
 }
 
 .item {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    padding: 16px;
+    transition: .3s ease all;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    justify-content: flex-start;
+
+    &:hover {
+        background: #abb8c3;
+    }
 }
 
 .itemText {
     margin-left: 8px;
+    font-size: 24px;
+    color: white;
+    display: none;
 }
