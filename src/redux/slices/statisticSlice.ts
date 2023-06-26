@@ -12,7 +12,7 @@ export interface FetchFavoriteTracksParamsData {
     timeRange: string
 }
 
-export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', async(params: FetchFavoriteTracksParamsData) => {
+export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', async(params?: FetchFavoriteTracksParamsData) => {
     const { data } = await spotifyApi.fetchFavoriteTracks(params.limit, params.timeRange)
     return data
 })
