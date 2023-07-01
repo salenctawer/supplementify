@@ -51,15 +51,49 @@ export interface SpotifyPlaylistsData {
     items: SpotifyPlaylistsItemData[]
 }
 
-export interface SpotifyTracksItemData {
+export interface SpotifyArtistsData {
     external_urls: SpotifyExternalUrlsData
-    followers: SpotifyFollowersData
-    genres: string[]
+    href: string
+    id: string
+    name: string
+    type: string
+    uri: string
+}
+
+export interface SpotifyAlbumData {
+    album_type: string
+    artists: SpotifyArtistsData[]
+    available_markets: string[]
+    external_urls: SpotifyExternalUrlsData
     href: string
     id: string
     images: SpotifyItemImagesData[]
     name: string
+    release_date: string
+    release_date_precision: string
+    total_tracks: number
+    type: string
+    uri: string
+}
+
+export interface SpotifyTracksItemData {
+    album: SpotifyAlbumData
+    artists: SpotifyArtistsData[]
+    available_markets: string[]
+    disc_number: number
+    duration_ms: number
+    explicit: boolean
+    external_ids: {
+        isrc: string
+    }
+    external_urls: SpotifyExternalUrlsData
+    href: string
+    id: string
+    is_local: booleab
+    name: string
     popularity: number
+    preview_url: string
+    track_number: number
     type: string
     uri: string
 }

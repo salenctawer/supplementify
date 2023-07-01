@@ -2,7 +2,9 @@ import { FC } from "react";
 
 import { TableCell, TableRow, Avatar } from "@mui/material";
 
+
 import { SpotifyTracksItemData } from "@/types/SpotifyData";
+
 
 export interface FavoriteTracksItem {
     trackItem: SpotifyTracksItemData
@@ -10,7 +12,6 @@ export interface FavoriteTracksItem {
 }
 
 export const FavoriteTrackItem: FC<FavoriteTracksItem> = (props) => {
-    console.log(props.trackItem)
     return (
         <TableRow>
             <TableCell>
