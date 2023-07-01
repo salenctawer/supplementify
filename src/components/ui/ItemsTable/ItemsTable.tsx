@@ -4,16 +4,9 @@ import React from 'react'
 
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 
-// TODO проблема с гидрацией при вставке itemsTableChildrens в TableBody
+// TODO проблема с гидрацией при вставкеchilder в TableBody
 
 export const ItemsTable = ({ children }: { children: React.ReactNode }) => {
-    const itemsTableChildrens = React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-            return React.cloneElement(child);
-          }
-          return child; 
-    })
-
     return (
         <TableContainer component={Paper}>
             <Table>
@@ -37,7 +30,7 @@ export const ItemsTable = ({ children }: { children: React.ReactNode }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {itemsTableChildrens}
+                    {children}
                 </TableBody>
             </Table>
         </TableContainer>
