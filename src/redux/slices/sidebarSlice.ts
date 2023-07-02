@@ -10,12 +10,12 @@ const initialState = {
         },
         {
             name: 'Favorite Tracks',
-            routeName: '/favorite-tracks/short-term',
+            routeName: '/favorite-tracks',
             icon: 'AudiotrackOutlined',
         }, 
         {
             name: 'Favorite Artists',
-            routeName: '/favorite-artists/short-term',
+            routeName: '/favorite-artists',
             icon: 'PersonOutlined',
         },
         {
