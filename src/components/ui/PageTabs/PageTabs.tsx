@@ -1,21 +1,24 @@
 'use client'
 
+import { FC, useState } from "react"
 import { Tabs, Tab } from "@mui/material"
-import { useState } from "react"
 
+export interface PageTabsData {
+    handleTabChange: (timeRange: string) => void
+}
 
-export const PageTabs = () => {
+export const PageTabs: FC<PageTabsData> = (props) => {
     const [tabValue, setTabValue] = useState('short_term')
 
-    const handleChange = (newValue: string) => {
-        console.log(newValue)
+    const handleChange = (_e: React.SyntheticEvent, newValue: string) => {
         setTabValue(newValue)
+        props.handleTabChange(newValue)
     }
 
-    return <Tabs value={tabValue} onChange={() => handleChange}>
-        <Tab value="short_term" label="LAST MONTH" />
-        <Tab value="medium_term" label="LAST 6 MONTHS" />
-        <Tab value="long_term" label="ALL TIME" />
+    return <Tabs value={tabValue} onChange={handleChange}>
+        <Tab value="short_term" label="Last month" />
+        <Tab value="medium_term" label="Last 6 months" />
+        <Tab value="long_term" label="All time" />
     </Tabs>
 }
 

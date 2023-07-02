@@ -19,11 +19,18 @@ export const FavoriteTracks: FC = () => {
 
     useEffect(() => {
         dispatch(fetchFavoriteTracks(params))
-    }, [])
+    }, [params])
+
+    const handleTabChange = (timeRange: string) => {
+        setParams({
+            ...params,
+            timeRange
+        })
+    }
 
     return (
         <PageContainer>
-            <PageTabs />
+            <PageTabs handleTabChange={handleTabChange}/>
             <ItemsTable>
             {
                 favoriteTracksData ? favoriteTracksData.items.map((track, index) => (
