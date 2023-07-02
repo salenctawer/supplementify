@@ -4,7 +4,7 @@ import React from 'react'
 
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 
-// TODO проблема с гидрацией при вставкеchilder в TableBody
+// TODO проблема с гидрацией при вставке children в TableBody
 
 export const ItemsTable = ({ children }: { children: React.ReactNode }) => {
     return (

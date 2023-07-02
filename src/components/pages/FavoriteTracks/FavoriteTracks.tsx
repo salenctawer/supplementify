@@ -6,6 +6,8 @@ import { fetchFavoriteTracks } from "@/redux/slices/statisticSlice"
 
 import ItemsTable from "@/components/ui/ItemsTable/ItemsTable"
 import FavoriteTrackItem from "@/components/pages/FavoriteTracks/FavoriteTracksItem/FavoriteTracksItem"
+import PageContainer from "@/components/ui/PageContainer/PageContainer"
+import PageTabs from "@/components/ui/PageTabs/PageTabs"
 
 export const FavoriteTracks: FC = () => {
     const dispatch = useAppDispatch()
@@ -20,13 +22,16 @@ export const FavoriteTracks: FC = () => {
     }, [])
 
     return (
-        <ItemsTable>
+        <PageContainer>
+            <PageTabs />
+            <ItemsTable>
             {
                 favoriteTracksData ? favoriteTracksData.items.map((track, index) => (
-                    <FavoriteTrackItem trackItem={track} index={index}/>
+                    <FavoriteTrackItem trackItem={track} index={index} key={index}/>
                 )) : <div>error</div>
             }
         </ItemsTable>
+        </PageContainer>
     )
 }
 
