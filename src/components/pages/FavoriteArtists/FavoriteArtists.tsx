@@ -1,3 +1,5 @@
+'use client'
+
 import { useAppDispatch } from "@/redux/hooks"
 import { fetchFavoriteTracks } from "@/redux/slices/statisticSlice"
 import { FC, useEffect, useState } from "react"

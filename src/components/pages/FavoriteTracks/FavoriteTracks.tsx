@@ -14,6 +14,7 @@ import PageTabs from "@/components/ui/PageTabs/PageTabs"
 export const FavoriteTracks: FC = () => {
     const dispatch = useAppDispatch()
     const favoriteTracksData = useAppSelector(state => state.statistic.favoriteTracksData)
+    const error = useAppSelector(state => state.statistic.error)
     const fetchStatus = useAppSelector(state => state.statistic.status)
 
     const [params, setParams]= useState({
@@ -21,8 +22,14 @@ export const FavoriteTracks: FC = () => {
         timeRange: 'short_term'
     })
 
+    const fetch = async () => {
+        await dispatch(fetchFavoriteTracks(params))
+    }
+
     useEffect(() => {
-        dispatch(fetchFavoriteTracks(params))
+        fetch()
+
+        throw new Error(error)
     }, [params])
 
     const handleTabChange = (timeRange: string) => {
@@ -34,6 +41,7 @@ export const FavoriteTracks: FC = () => {
 
     return (
         <PageContainer>
+            {error}
             <PageTabs handleTabChange={handleTabChange}/>
             {
                 fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :

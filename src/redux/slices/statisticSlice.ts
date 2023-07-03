@@ -3,7 +3,7 @@ import { spotifyApi } from '@/api/api'
 import { SpotifyFavoriteTracksData, SpotifyPlaylistsData } from "@/types/SpotifyData";
 
 export enum FetchTypes {
-    fulfilled = 'loaded',
+    FULFILED = 'loaded',
     LOADING = 'loading',
     REJECTED = 'error'
 }
@@ -28,6 +28,7 @@ const initialState = {
     playlistsData: null as null | SpotifyPlaylistsData,
     favoriteTracksData: null as null | SpotifyFavoriteTracksData,
     status: 'loading' as FetchTypes,
+    error: null as null | Error
 }
 
 const statisticSlice = createSlice({
@@ -45,19 +46,22 @@ const statisticSlice = createSlice({
         })
         builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
             state.playlistsData = action.payload
-            state.status = FetchTypes.fulfilled
+            state.status = FetchTypes.FULFILED
         })
         builder.addCase(fetchFavoriteTracks.pending, (state) => {
             state.favoriteTracksData = null
             state.status = FetchTypes.LOADING
         })
-        builder.addCase(fetchFavoriteTracks.rejected, (state) => {
+        builder.addCase(fetchFavoriteTracks.rejected, (state, action) => {
             state.favoriteTracksData = null
             state.status = FetchTypes.REJECTED
+            if(action.error) {
+                state.error = action.error
+            }
         })
         builder.addCase(fetchFavoriteTracks.fulfilled, (state, action) => {
             state.favoriteTracksData = action.payload
-            state.status = FetchTypes.fulfilled
+            state.status = FetchTypes.FULFILED
         })  
     }
 })
