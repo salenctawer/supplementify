@@ -22,14 +22,16 @@ export const FavoriteTracks: FC = () => {
         timeRange: 'short_term'
     })
 
-    const fetch = async () => {
-        await dispatch(fetchFavoriteTracks(params))
-    }
-
     useEffect(() => {
+        const fetch = async () => {
+            await dispatch(fetchFavoriteTracks(params))
+        }
+
         fetch()
 
-        throw new Error(error)
+        if(error) {
+            throw new Error(error)
+        }
     }, [params])
 
     const handleTabChange = (timeRange: string) => {
@@ -41,7 +43,6 @@ export const FavoriteTracks: FC = () => {
 
     return (
         <PageContainer>
-            {error}
             <PageTabs handleTabChange={handleTabChange}/>
             {
                 fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
