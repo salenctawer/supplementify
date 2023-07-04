@@ -8,8 +8,8 @@ import { FetchTypes } from "@/redux/slices/statisticSlice"
 import ItemsTable from "@/components/ui/ItemsTable/ItemsTable"
 import ItemsTableSkeleton from "@/components/ui/ItemsTable/ItemsTableSkeleton"
 import FavoriteTrackItem from "@/components/pages/FavoriteTracks/FavoriteTracksItem/FavoriteTracksItem"
-import PageContainer from "@/components/ui/PageContainer/PageContainer"
 import PageTabs from "@/components/ui/PageTabs/PageTabs"
+import { PageProvider } from "@/components/PageProvider/PageProvider"
 
 export const FavoriteTracks: FC = () => {
     const dispatch = useAppDispatch()
@@ -23,15 +23,8 @@ export const FavoriteTracks: FC = () => {
     })
 
     useEffect(() => {
-        const fetch = async () => {
-            await dispatch(fetchFavoriteTracks(params))
-        }
+        dispatch(fetchFavoriteTracks(params))
 
-        fetch()
-
-        if(error) {
-            throw new Error(error)
-        }
     }, [params])
 
     const handleTabChange = (timeRange: string) => {
@@ -42,7 +35,7 @@ export const FavoriteTracks: FC = () => {
     }
 
     return (
-        <PageContainer>
+        <PageProvider error={error}>
             <PageTabs handleTabChange={handleTabChange}/>
             {
                 fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
@@ -54,7 +47,7 @@ export const FavoriteTracks: FC = () => {
                     }
                 </ItemsTable>
             }
-        </PageContainer>
+        </PageProvider>
     )
 }
 
