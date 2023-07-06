@@ -10,17 +10,26 @@ const manrope = Manrope({ subsets: ['latin'], display: 'swap' })
 
 const getDesignTokens = (mode: PaletteMode, isMobileDevice: boolean) => ({
     shape: {
-        borderRadius: 8, // mb -> 16 ??
+        borderRadius: 8,
     },
     palette: {
         mode,
         ...(mode === 'light'
             ? {
                   background: { default: '#eceff1', paper: '#fafafa' },
+                  primary: {
+                    main: 'rgb(30, 215, 96)', //TODO подумать над цветами
+                    contrastText: '#fff',
+                },
               }
             : {
                   background: { default: '#272731', paper: '#32323e' },
+                  primary: {
+                    main: 'rgb(37, 179, 89)',
+                    contrastText: '#fff',
+                },
               }),
+        
     },
     typography: {
         fontSize: isMobileDevice ? 12 : 14,
@@ -62,25 +71,10 @@ const getDesignTokens = (mode: PaletteMode, isMobileDevice: boolean) => ({
                 },
             },
         },
-        MuiInputBase: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: mode === 'light' ? '#fff' : '#32323e',
-                },
-            },
-        },
-        MuiMenuItem: {
-            styleOverrides: {
-                root: {
-                    margin: 'auto 4px',
-                    borderRadius: 8,
-                },
-            },
-        },
     },
 })
 
-export const ColorModeContext = createContext({ toggleColorMode: () => {} })
+export const ColorModeContext = createContext({ toggleColorMode: () => { } })
 
 export default function ThemeBuilder({ children }: React.HTMLAttributes<HTMLDivElement>) {
     const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)')
