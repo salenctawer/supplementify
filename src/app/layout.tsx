@@ -1,11 +1,8 @@
 import { Metadata } from 'next'
-import './globals.css'
-import { Inter } from 'next/font/google'
 import { Providers } from "@/redux/provider";
 
 import { AppSidebar } from '@/components/app/AppSidebar/AppSidebar';
-
-const inter = Inter({ subsets: ['latin'] })
+import ThemeBuilder from '@/styles/themeBuilder';
 
 export const metadata: Metadata = {
   title: 'Supplementify',
@@ -21,8 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <AppSidebar />
-          {children}
+          <ThemeBuilder>
+            <AppSidebar />
+            {children}
+          </ThemeBuilder>
         </Providers>
       </body>
     </html>
