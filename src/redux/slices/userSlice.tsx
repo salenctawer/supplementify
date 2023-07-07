@@ -14,5 +14,10 @@ const userSlice = createSlice({
 	}
 })
 
-export const { setAccessToken } = userSlice.actions
+export const { actions: userActions} = userSlice
+
+export const allUserActions = {
+    ...userActions
+}
+
 export default userSlice.reducer

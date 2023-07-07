@@ -63,6 +63,7 @@ const statisticSlice = createSlice({
         builder.addCase(fetchFavoriteTracks.pending, (state) => {
             state.favoriteTracksData = null
             state.status = FetchTypes.LOADING
+            state.error = null
         })
         builder.addCase(fetchFavoriteTracks.rejected, (state, action) => {
             state.favoriteTracksData = null
@@ -74,11 +75,13 @@ const statisticSlice = createSlice({
         builder.addCase(fetchFavoriteTracks.fulfilled, (state, action) => {
             state.favoriteTracksData = action.payload
             state.status = FetchTypes.FULFILED
+            state.error = null
         })
         // recently
         builder.addCase(fetchRecentlyPlayed.pending, (state) => {
             state.recentlyPlayedData = null
             state.status = FetchTypes.LOADING
+            state.error = null
         })
         builder.addCase(fetchRecentlyPlayed.rejected, (state, action) => {
             state.recentlyPlayedData = null
@@ -90,6 +93,7 @@ const statisticSlice = createSlice({
         builder.addCase(fetchRecentlyPlayed.fulfilled, (state, action) => {
             state.recentlyPlayedData = action.payload
             state.status = FetchTypes.FULFILED
+            state.error = null
         })
     }
 })
