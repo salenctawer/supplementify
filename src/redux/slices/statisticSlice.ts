@@ -24,9 +24,15 @@ export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', asyn
     return data
 })
 
+export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async(limit: number) => {
+    const { data } = await spotifyApi.fetchRecentlyPlayed(limit)
+    return data
+})
+
 const initialState = {
     playlistsData: null as null | SpotifyPlaylistsData,
     favoriteTracksData: null as null | SpotifyFavoriteTracksData,
+    recentlyPlayedData: null as null | any,
     status: 'loading' as FetchTypes,
     error: null as null | Error
 }
@@ -36,6 +42,7 @@ const statisticSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // playlists
         builder.addCase(fetchPlaylists.pending, (state) => {
             state.playlistsData = null
             state.status = FetchTypes.LOADING
@@ -48,6 +55,7 @@ const statisticSlice = createSlice({
             state.playlistsData = action.payload
             state.status = FetchTypes.FULFILED
         })
+        /// tracks
         builder.addCase(fetchFavoriteTracks.pending, (state) => {
             state.favoriteTracksData = null
             state.status = FetchTypes.LOADING
@@ -62,7 +70,23 @@ const statisticSlice = createSlice({
         builder.addCase(fetchFavoriteTracks.fulfilled, (state, action) => {
             state.favoriteTracksData = action.payload
             state.status = FetchTypes.FULFILED
-        })  
+        })
+        // recently
+        builder.addCase(fetchRecentlyPlayed.pending, (state) => {
+            state.recentlyPlayedData = null
+            state.status = FetchTypes.LOADING
+        })
+        builder.addCase(fetchRecentlyPlayed.rejected, (state, action) => {
+            state.recentlyPlayedData = null
+            state.status = FetchTypes.REJECTED
+            if(action.error) {
+                state.error = action.error
+            }
+        })
+        builder.addCase(fetchRecentlyPlayed.fulfilled, (state, action) => {
+            state.recentlyPlayedData = action.payload
+            state.status = FetchTypes.FULFILED
+        })
     }
 })
 

@@ -7,7 +7,6 @@ import { SidebarTabItemData } from "@/types/SidebarData"
 
 import { IconComponent } from "@/components/ui/IconComponent/IconComponent"
 import { Button } from "@mui/material"
-import { useTheme } from "@mui/material"
 
 import styles from './AppSidebar.module.scss'
 import { ColorModeContext } from "@/styles/themeBuilder"
@@ -23,7 +22,7 @@ export const AppSidebar: FC = () => {
            return toggleColorMode()
         }
 
-        return router.push(item.routeName)
+        router.push(item.routeName)
     }
 
     return <div className={styles.sidebar}>
