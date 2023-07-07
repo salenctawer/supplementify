@@ -40,7 +40,11 @@ const initialState = {
 const statisticSlice = createSlice({
     name: 'statistic',
     initialState,
-    reducers: {},
+    reducers: {
+        nextStep:(state) => {
+            const qwe = 1
+        }
+    },
     extraReducers: (builder) => {
         // playlists
         builder.addCase(fetchPlaylists.pending, (state) => {
@@ -89,5 +93,11 @@ const statisticSlice = createSlice({
         })
     }
 })
+
+export const { actions: statisticActions} = statisticSlice
+
+export const allStatisticActions = {
+    ...statisticActions
+}
 
 export default statisticSlice.reducer

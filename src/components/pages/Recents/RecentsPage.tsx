@@ -1,9 +1,16 @@
 
 
 import { PageProvider } from "@/components/PageProvider/PageProvider"
+import { useEffect } from "react"
 
 export const RecentsPage = () => {
-    return <div>recents</div>
+
+    useEffect(() => {
+    }, [])
+
+    return <PageProvider >
+
+    </PageProvider>
 }
 
 
