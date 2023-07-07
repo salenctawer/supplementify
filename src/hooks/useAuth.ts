@@ -43,6 +43,20 @@ export const useAuth = () => {
         router.push('/')
     }
 
+    const isAuthCheck = () => {
+        if(!accessStoreToken) {
+            const storageToken = getStorageToken()
+
+            if(!storageToken) {
+                return router.push('/login')
+            }
+
+            else {
+                return setStoreToken(storageToken)
+            }
+        }
+    }
+
     return {
         accessStorageToken: getStorageToken(),
         accessStoreToken,
@@ -50,6 +64,7 @@ export const useAuth = () => {
         setAccessTokenToAll,
         setStoreToken,
         logout,
+        isAuthCheck,
 
     }
 }
