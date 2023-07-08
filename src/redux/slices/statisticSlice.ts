@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { spotifyApi } from '@/api/api'
-import { SpotifyFavoriteTracksData, SpotifyPlaylistsData } from "@/types/SpotifyData";
+import { SpotifyFavoriteTracksData, SpotifyPlaylistsData, SpotifyRecentlyPlayedData } from "@/types/SpotifyData";
 
 export enum FetchTypes {
     FULFILED = 'loaded',
@@ -32,7 +32,7 @@ export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async(limi
 const initialState = {
     playlistsData: null as null | SpotifyPlaylistsData,
     favoriteTracksData: null as null | SpotifyFavoriteTracksData,
-    recentlyPlayedData: null as null | any,
+    recentlyPlayedData: null as null | SpotifyRecentlyPlayedData,
     status: 'loading' as FetchTypes,
     error: null as null | Error
 }

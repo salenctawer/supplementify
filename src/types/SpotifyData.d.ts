@@ -107,3 +107,26 @@ export interface SpotifyFavoriteTracksData {
     total: number
     items: SpotifyTracksItemData[]
 }
+
+export interface SpotifyRecentlyPlayedItemData {
+    context: {
+        external_urls: SpotifyExternalUrlsData
+        href: string
+        type: string
+        uri: string
+        played_at: string
+    }
+    played_at: string
+    track: SpotifyTracksItemData
+}
+
+export interface SpotifyRecentlyPlayedData {
+    cursos: {
+        after: string
+        before: string
+    }
+    href: string
+    items: SpotifyRecentlyPlayedItemData[]
+    limit: number
+    next: string
+}
