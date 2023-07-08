@@ -6,6 +6,7 @@ export const useAuth = () => {
     const router = useRouter()
     const authActions = useActionCreators(allUserActions)
     const accessStoreToken = useAppSelector(state => state.user.accessToken) || ''
+    const storageToken = window.localStorage.getItem('accessToken')
 
     const getStorageToken = () => {
         const parsedHash = new URLSearchParams(window.location.hash)
@@ -45,7 +46,6 @@ export const useAuth = () => {
 
     const isAuthCheck = () => {
         if(!accessStoreToken) {
-            const storageToken = getStorageToken()
 
             if(!storageToken) {
                 return router.push('/login')
