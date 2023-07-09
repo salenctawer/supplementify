@@ -7,7 +7,9 @@ import ItemsTable from "@/components/ui/ItemsTable/ItemsTable"
 import ItemsTableSkeleton from "@/components/ui/ItemsTable/ItemsTableSkeleton"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { FetchTypes, fetchRecentlyPlayed } from "@/redux/slices/statisticSlice"
-import RecentsItem from "@/components/pages/Recents/RecentsItem/RecentsItem"
+import { RecentsItem } from "@/components/pages/Recents/RecentsItem/RecentsItem"
+import { Button } from "@mui/material"
+import styles from './RecentsPage.module.scss'
 
 export const RecentsPage = () => {
     const dispatch = useAppDispatch()
@@ -23,10 +25,11 @@ export const RecentsPage = () => {
         'Last time listening'
     ]
 
-    const [limit, setLimit] = useState(50)
+    const [limit, setLimit] = useState(20)
 
     const handleLimitChange = () => {
-
+        setLimit(50)
+        dispatch(fetchRecentlyPlayed(limit))
     }
 
     useEffect(() => {
@@ -43,6 +46,9 @@ export const RecentsPage = () => {
                 ))
             }
         </ItemsTable>
+       }
+       {
+        limit === 20 ? <Button onClick={handleLimitChange} variant="contained" className={styles.button}>Load more</Button> : <div></div>
        }
     </PageProvider>
 }

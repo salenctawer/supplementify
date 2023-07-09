@@ -1,4 +1,4 @@
-import { FC } from "react"
+import React, { FC } from "react"
 
 import { SpotifyRecentlyPlayedItemData } from "@/types/SpotifyData"
 import useArtits from "@/hooks/useArtists"
@@ -11,10 +11,11 @@ interface RecentsItemPropsData {
    index: number
 }
 
-export const RecentsItem: FC<RecentsItemPropsData> = (props) => {
+export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
     const artists = useArtits(props.item.track.artists)
     const { getLastListeningTime } = useTime()
     const time = getLastListeningTime(props.item.played_at)
+    console.log(props.index, '123')
 
     return <TableRow>
         <TableCell>
@@ -35,4 +36,4 @@ export const RecentsItem: FC<RecentsItemPropsData> = (props) => {
     </TableRow>
 }
 
-export default RecentsItem
+export const RecentsItem = React.memo(RecentsDefaultItem)
