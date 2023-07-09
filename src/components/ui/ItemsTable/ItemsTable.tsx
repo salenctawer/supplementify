@@ -6,27 +6,19 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 
 // TODO проблема с гидрацией при вставке children в TableBody
 
-export const ItemsTable = ({ children }: { children: React.ReactNode }) => {
+export const ItemsTable = ({ children, rows }: { children: React.ReactNode, rows: string[] }) => {
     return (
         <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>
-                            Position
-                        </TableCell>
-                        <TableCell>
-                            Cover
-                        </TableCell>
-                        <TableCell>
-                            Title
-                        </TableCell>
-                        <TableCell>
-                            Artist
-                        </TableCell>
-                        <TableCell>
-                            Duration
-                        </TableCell>
+                        {
+                            rows.map((item) => (
+                                <TableCell>
+                                    {item}
+                                </TableCell>
+                            ))
+                        }
                     </TableRow>
                 </TableHead>
                 <TableBody>

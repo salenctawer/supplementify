@@ -15,6 +15,13 @@ export const RecentsPage = () => {
     const fetchStatus = useAppSelector(state => state.statistic.status)
     const recenltyPlayedData = useAppSelector(state => state.statistic.recentlyPlayedData)
 
+    const rows = [
+        'Position',
+        'Cover',
+        'Artist',
+        'Last time listening'
+    ]
+
     const [limit, setLimit] = useState(50)
 
     const handleLimitChange = () => {
@@ -28,10 +35,10 @@ export const RecentsPage = () => {
     return <PageProvider error={error}>
        {
         fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
-        <ItemsTable>
+        <ItemsTable rows={rows}>
             {
                 recenltyPlayedData?.items.map((item, idx) => (
-                    <RecentsItem />
+                    <RecentsItem item={item} index={idx}/>
                 ))
             }
         </ItemsTable>

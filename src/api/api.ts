@@ -29,7 +29,7 @@ export const spotifyApi = {
     }
 }
 
-instance.interceptors.request.use((config: any) => { //типизировать
+instance.interceptors.request.use((config: any) => { //TODO: типизировать + проверка токена на срок годности
     config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
     return config;
 })

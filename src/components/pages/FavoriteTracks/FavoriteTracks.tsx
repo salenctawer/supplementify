@@ -16,6 +16,13 @@ export const FavoriteTracks: FC = () => {
     const favoriteTracksData = useAppSelector(state => state.statistic.favoriteTracksData)
     const error = useAppSelector(state => state.statistic.error)
     const fetchStatus = useAppSelector(state => state.statistic.status)
+    const rows = [
+        'Position',
+        'Cover',
+        'Title',
+        'Artist',
+        'Duration'
+    ]
 
     const [params, setParams]= useState({
         limit: 50,
@@ -39,7 +46,7 @@ export const FavoriteTracks: FC = () => {
             <PageTabs handleTabChange={handleTabChange}/>
             {
                 fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
-                <ItemsTable>
+                <ItemsTable rows={rows}>
                     {
                         favoriteTracksData?.items.map((track, index) => (
                             <FavoriteTrackItem trackItem={track} index={index} key={index}/>

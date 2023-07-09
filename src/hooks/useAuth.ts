@@ -45,6 +45,8 @@ export const useAuth = () => {
     }
 
     const isAuthCheck = () => {
+        console.log(accessStoreToken)
+        console.log(storageToken)
         if(!accessStoreToken) {
 
             if(!storageToken) {
