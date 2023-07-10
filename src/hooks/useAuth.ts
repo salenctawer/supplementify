@@ -6,7 +6,7 @@ export const useAuth = () => {
     const router = useRouter()
     const authActions = useActionCreators(allUserActions)
     const accessStoreToken = useAppSelector(state => state.user.accessToken) || ''
-    const storageToken = window.localStorage.getItem('accessToken')
+    const accessStorageToken = window.localStorage.getItem('accessToken')
 
     const getStorageToken = () => {
         const parsedHash = new URLSearchParams(window.location.hash)
@@ -45,23 +45,21 @@ export const useAuth = () => {
     }
 
     const isAuthCheck = () => {
-        console.log(accessStoreToken)
-        console.log(storageToken)
         if(!accessStoreToken) {
 
-            if(!storageToken) {
+            if(!accessStorageToken) {
                 return router.push('/login')
             }
 
             else {
-                return setStoreToken(storageToken)
+                return setStoreToken(accessStorageToken)
             }
         }
     }
 
     return {
-        accessStorageToken: getStorageToken(),
         accessStoreToken,
+        accessStorageToken,
         redirectToSpotifyLogin,
         setAccessTokenToAll,
         setStoreToken,

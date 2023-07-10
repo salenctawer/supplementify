@@ -15,7 +15,6 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
     const artists = useArtits(props.item.track.artists)
     const { getLastListeningTime } = useTime()
     const time = getLastListeningTime(props.item.played_at)
-    console.log(props.index, '123')
 
     return <TableRow>
         <TableCell>

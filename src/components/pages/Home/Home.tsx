@@ -1,16 +1,27 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 import styles from './Home.module.css'
 import { Button } from '@mui/material'
+import { useAuth } from '@/hooks/useAuth'
 
 const Home: FC = () => {
-    const router = useRouter()
+    const { redirectToSpotifyLogin, accessStorageToken, setStoreToken, accessStoreToken } = useAuth()
+
+    useEffect(() => {
+        if(accessStorageToken) {
+            setStoreToken(accessStorageToken)
+        }
+    }, [accessStorageToken])
 
     return <main className={styles.main}>
-        <Button color="primary" variant="contained">Login with spotify</Button>
+        <Button onClick={redirectToSpotifyLogin} color="primary" variant="contained" disabled={!!accessStoreToken}>
+            {
+                accessStoreToken ? 'You are already logged in' : 'Login with spotify'
+            }
+        </Button>
     </main>
 }
 
