@@ -12,9 +12,9 @@ const useTime = () => {
 
     const getDuration = useCallback((duration: number) => {
         const seconds = Math.floor((duration / 1000) % 60)
-        const minutes = Math.floor((duration / 1000 / 60) % 60);
+        const minutes = Math.floor((duration / 1000 / 60) % 60)
         const hours = Math.floor((duration / 1000 / 60/ 60) % 60)
-
+        
         if(minutes && seconds && hours) {
             return `${hours}h ${minutes}m ${seconds}s`
         }

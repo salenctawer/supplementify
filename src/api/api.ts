@@ -33,3 +33,18 @@ instance.interceptors.request.use((config: any) => { //TODO: типизиров�
     config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
     return config;
 })
+
+instance.interceptors.response.use((response: any) => {
+    return response
+}, async function(error) {
+    if(error.response.data.error.message === 'The access token expired') {
+        const queryString = new URLSearchParams({
+            response_type: String(process.env.NEXT_PUBLIC_RESPONSE_TYPE),
+            client_id: String(process.env.NEXT_PUBLIC_CLIENT_ID),
+            redirect_uri: process.env.NODE_ENV === 'development' ? String(process.env.NEXT_PUBLIC_REDIRECT_DEV_URI) : String(process.env.NEXT_PUBLIC_REDIRECT_PROD_URI),
+            scope: String(process.env.NEXT_PUBLIC_SCOPES)
+        }).toString()
+
+       return location.href = `https://accounts.spotify.com/authorize?${queryString}`
+    }
+})

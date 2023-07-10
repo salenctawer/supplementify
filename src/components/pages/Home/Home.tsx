@@ -1,7 +1,6 @@
 'use client'
 
 import { FC, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
 import styles from './Home.module.css'
 import { Button } from '@mui/material'

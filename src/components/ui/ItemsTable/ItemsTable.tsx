@@ -14,7 +14,7 @@ export const ItemsTable = ({ children, rows }: { children: React.ReactNode, rows
                     <TableRow>
                         {
                             rows.map((item) => (
-                                <TableCell>
+                                <TableCell key={item}>
                                     {item}
                                 </TableCell>
                             ))
