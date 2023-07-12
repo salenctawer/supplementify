@@ -34,3 +34,5 @@ export const AppSidebar: FC = () => {
         ))}
     </div>
 }
+
+export default AppSidebar

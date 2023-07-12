@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, List, ListItem } from "@mui/material"
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, List } from "@mui/material"
 import useMedia from '@/styles/useMedia'
 
 // TODO проблема с гидрацией при вставке children в TableBody

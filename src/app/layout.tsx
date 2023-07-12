@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import { Providers } from "@/redux/provider";
 
-import { AppSidebar } from '@/components/app/AppSidebar/AppSidebar';
+import AppSidebar from '@/components/app/AppSidebar/AppSidebar';
+import AppHeader from '@/components/app/AppHeader/AppHeader';
+
 import ThemeBuilder from '@/styles/themeBuilder';
 
 export const metadata: Metadata = {
@@ -19,6 +21,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <ThemeBuilder>
+            <AppHeader />
             <AppSidebar />
             {children}
           </ThemeBuilder>
