@@ -2,29 +2,36 @@
 
 import React from 'react'
 
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, List, ListItem } from "@mui/material"
+import useMedia from '@/styles/useMedia'
 
 // TODO проблема с гидрацией при вставке children в TableBody
 
 export const ItemsTable = ({ children, rows }: { children: React.ReactNode, rows: string[] }) => {
+    const { mdSize } = useMedia()
+    
     return (
         <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        {
-                            rows.map((item) => (
-                                <TableCell key={item}>
-                                    {item}
-                                </TableCell>
-                            ))
-                        }
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {children}
-                </TableBody>
-            </Table>
+            {
+               mdSize ? <Table>
+               <TableHead>
+                   <TableRow>
+                       {
+                           rows.map((item) => (
+                               <TableCell key={item}>
+                                   {item}
+                               </TableCell>
+                           ))
+                       }
+                   </TableRow>
+               </TableHead>
+               <TableBody>
+                   {children}
+               </TableBody>
+           </Table> : <List>
+            { children }
+           </List> 
+            }
         </TableContainer>
     )
 }

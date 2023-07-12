@@ -29,14 +29,14 @@ export const spotifyApi = {
     }
 }
 
-instance.interceptors.request.use((config: any) => { //TODO: типизировать + проверка токена на срок годности
+instance.interceptors.request.use((config: any) => { //TODO: типизировать
     config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
     return config;
 })
 
 instance.interceptors.response.use((response: any) => {
     return response
-}, async function(error) {
+}, async function(error) { // по другому рефрешить токен, пока это временная затычка
     if(error.response.data.error.message === 'The access token expired') {
         const queryString = new URLSearchParams({
             response_type: String(process.env.NEXT_PUBLIC_RESPONSE_TYPE),

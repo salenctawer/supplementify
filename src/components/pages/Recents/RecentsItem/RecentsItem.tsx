@@ -4,7 +4,7 @@ import { SpotifyRecentlyPlayedItemData } from "@/types/SpotifyData"
 import useArtits from "@/hooks/useArtists"
 import useTime from "@/hooks/useTime"
 
-import { Avatar, TableCell, TableRow } from "@mui/material"
+import { Avatar, ListItem, TableCell, TableRow, ListItemAvatar, ListItemText, Typography } from "@mui/material"
 import useMedia from "@/styles/useMedia"
 
 interface RecentsItemPropsData {
@@ -19,10 +19,8 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
     const artists = useArtits(props.item.track.artists)
     const time = getLastListeningTime(props.item.played_at)
 
-    return <div>
-        {
-            mdSize ? <TableRow hover>
-            <TableCell>
+    return ( mdSize ?<TableRow hover>
+        <TableCell>
                 {props.index + 1}
             </TableCell>
             <TableCell>
@@ -35,11 +33,30 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
                 {artists}
             </TableCell>
             <TableCell>
-                {time}
+                {time + ' ago'}
             </TableCell>
-        </TableRow> : <div>sdfsdfsdf</div>
-        }
-    </div>
+    </TableRow> : <ListItem>
+        <ListItemAvatar>
+            <Avatar src={props.item.track.album.images[0].url}/>
+        </ListItemAvatar>
+        <ListItemText primary={`${artists} - ${props.item.track.name}`} secondary={`${time} ago`}>
+        </ListItemText>
+    </ListItem>
+    )
+
+    // return (
+    //     mdSize ? <RecentsListItem /> : <RecentsRowItem />
+    // )
 }
+
+// const RecentsListItem = () => {
+//     return <ListItem>
+        
+//     </ListItem>
+// }
+
+// const RecentsRowItem = () => {
+//     return <TableRow></TableRow>
+// }
 
 export const RecentsItem = React.memo(RecentsDefaultItem)
