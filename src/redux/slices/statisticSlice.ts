@@ -1,30 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { spotifyApi } from '@/api/api'
 import { SpotifyFavoriteTracksData, SpotifyPlaylistsData, SpotifyRecentlyPlayedData } from "@/types/SpotifyData";
-
-export enum FetchTypes {
-    FULFILED = 'loaded',
-    LOADING = 'loading',
-    REJECTED = 'error'
-}
+import { FetchTypes } from "@/types/EnumsData";
 
 export interface FetchFavoriteTracksParamsData {
     limit: number
     timeRange: string
 }
 
-export const fetchPlaylists = createAsyncThunk('/user/playlists', async() => {
-    const {data} = await spotifyApi.fetchPlaylists()
+export const fetchPlaylists = createAsyncThunk('/user/playlists', async () => {
+    const { data } = await spotifyApi.fetchPlaylists()
     return data
 })
 
 
-export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', async(params: FetchFavoriteTracksParamsData) => {
+export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', async (params: FetchFavoriteTracksParamsData) => {
     const { data } = await spotifyApi.fetchFavoriteTracks(params.limit, params.timeRange)
     return data
 })
 
-export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async(limit: number) => {
+export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async (limit: number) => {
     const { data } = await spotifyApi.fetchRecentlyPlayed(limit)
     return data
 })
@@ -41,7 +36,7 @@ const statisticSlice = createSlice({
     name: 'statistic',
     initialState,
     reducers: {
-        nextStep:(state) => {
+        nextStep: (state) => {
             const qwe = 1
         }
     },
@@ -68,7 +63,7 @@ const statisticSlice = createSlice({
         builder.addCase(fetchFavoriteTracks.rejected, (state, action) => {
             state.favoriteTracksData = null
             state.status = FetchTypes.REJECTED
-            if(action.error) {
+            if (action.error) {
                 state.error = action.error
             }
         })
@@ -86,7 +81,7 @@ const statisticSlice = createSlice({
         builder.addCase(fetchRecentlyPlayed.rejected, (state, action) => {
             state.recentlyPlayedData = null
             state.status = FetchTypes.REJECTED
-            if(action.error) {
+            if (action.error) {
                 state.error = action.error
             }
         })
@@ -98,7 +93,7 @@ const statisticSlice = createSlice({
     }
 })
 
-export const { actions: statisticActions} = statisticSlice
+export const { actions: statisticActions } = statisticSlice
 
 export const allStatisticActions = {
     ...statisticActions

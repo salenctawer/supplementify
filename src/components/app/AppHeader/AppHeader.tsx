@@ -1,12 +1,16 @@
 'use client'
 
-import { FC } from "react"
+import { FC, useEffect } from "react"
 
 import { Box, AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 
 
 export const AppHeader: FC = () => {
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <Box sx={{ flexGrow: 1, marginBottom: 4 }}>
@@ -24,7 +28,10 @@ export const AppHeader: FC = () => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Supplementify
                 </Typography>
-                <Button color="inherit">Login</Button>
+                <div>
+
+                    <Button color="inherit">Login</Button>
+                </div>
                 </Toolbar>
             </AppBar>
         </Box>

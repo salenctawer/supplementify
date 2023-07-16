@@ -7,6 +7,7 @@ const instance = axios.create({
 const PLAYLISTS_ENDPOINT = 'v1/me/playlists'
 const FAVORITE_TRACKS_ENDPOINT = 'v1/me/top/tracks'
 const RECENTLY_PLAYED_ENDPOINT = 'v1/me/player/recently-played'
+const USER_INFO_ENDPOINT = 'v1/me'
 
 export const spotifyApi = {
     fetchPlaylists() {
@@ -26,6 +27,9 @@ export const spotifyApi = {
                 limit
             }
         })
+    },
+    fetchUserInfo() {
+        return instance.get(USER_INFO_ENDPOINT)
     }
 }
 

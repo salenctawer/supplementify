@@ -6,8 +6,9 @@ import { PageProvider } from "@/components/PageProvider/PageProvider"
 import ItemsTable from "@/components/ui/ItemsTable/ItemsTable"
 import ItemsTableSkeleton from "@/components/ui/ItemsTable/ItemsTableSkeleton"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { FetchTypes, fetchRecentlyPlayed } from "@/redux/slices/statisticSlice"
+import { fetchRecentlyPlayed } from "@/redux/slices/statisticSlice"
 import { RecentsItem } from "@/components/pages/Recents/RecentsItem/RecentsItem"
+import { FetchTypes } from "@/types/EnumsData"
 import { Button } from "@mui/material"
 import styles from './RecentsPage.module.scss'
 

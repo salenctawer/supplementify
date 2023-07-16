@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { fetchFavoriteTracks } from "@/redux/slices/statisticSlice"
-import { FetchTypes } from "@/redux/slices/statisticSlice"
+import { FetchTypes } from "@/types/EnumsData"
 
 import ItemsTable from "@/components/ui/ItemsTable/ItemsTable"
 import ItemsTableSkeleton from "@/components/ui/ItemsTable/ItemsTableSkeleton"
