@@ -24,10 +24,6 @@ const initialState = {
             icon: 'HeadphonesOutlined',
         },
         {
-            name: 'Light Mode',
-            icon: 'PersonOutlined',
-        }, 
-        {
             name: 'Logout',
             routeName: '/logout',
             icon: 'LogoutOutlined',
@@ -39,10 +35,6 @@ const initialState = {
             routeName: '/',
             icon: 'HomeOutlined',
         },
-        {
-            name: 'Light Mode',
-            icon: 'PersonOutlined',
-        }, 
         {
             name: 'Login',
             routeName: '/login',

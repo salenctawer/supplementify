@@ -1,17 +1,22 @@
 'use client'
 
-import { FC, useEffect } from "react"
+import React, { FC, useEffect, useMemo } from "react"
 
-import { Box, AppBar, Toolbar, IconButton, Typography, Button, Avatar } from "@mui/material"
+import { Box, AppBar, Toolbar, IconButton, Typography, Button, Avatar, useTheme } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchUserInfo } from "@/redux/slices/userSlice";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from 'next/navigation'
 
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
+import { ColorModeContext } from "@/styles/themeBuilder"
+import { ModeTypes } from "@/types/EnumsData";
 
 
 export const AppHeader: FC = () => {
+    const theme = useTheme()
+    const { toggleColorMode } = React.useContext(ColorModeContext)
     const dispatch = useAppDispatch()
     const userInfo = useAppSelector(state => state.user.userInfo)
     const { redirectToSpotifyLogin, accessStorageToken, accessStoreToken } = useAuth()
@@ -23,8 +28,16 @@ export const AppHeader: FC = () => {
         }
     }, [accessStorageToken, accessStoreToken])
 
+    const isDarkMode = useMemo(() => {
+        return theme.palette.mode === ModeTypes.DARK
+    }, [theme.palette.mode])
+
     const onLogoutClick = () => {
         router.push('/logout')
+    }
+
+    const toggleMode = () => {
+        toggleColorMode()
     }
 
     return (
@@ -43,6 +56,12 @@ export const AppHeader: FC = () => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Supplementify
                 </Typography>
+                <DarkModeSwitch
+                    style={{ marginBottom: '2rem' }}
+                    checked={isDarkMode}
+                    onChange={toggleMode}
+                    size={120}
+                />
                 {
                     userInfo ?
                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
