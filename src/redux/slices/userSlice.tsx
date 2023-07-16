@@ -1,7 +1,7 @@
 import { spotifyApi } from "@/api/api"
 import { FetchTypes } from "@/types/EnumsData"
+import { SpotifyUserData } from "@/types/SpotifyData"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import Error from "next/error"
 
 export const fetchUserInfo = createAsyncThunk('/user/info', async() => {
 	const { data } = await spotifyApi.fetchUserInfo()
@@ -11,7 +11,7 @@ export const fetchUserInfo = createAsyncThunk('/user/info', async() => {
 
 const initialState = {
     accessToken: '',
-	userInfo: {} as any, //TODO типы
+	userInfo: null as null | SpotifyUserData,
 	status: 'loading' as FetchTypes,
 }
 
@@ -24,7 +24,7 @@ const userSlice = createSlice({
 		}
 	},
 	extraReducers: (builder) => {
-		// playlists
+		// userInfo
         builder.addCase(fetchUserInfo.pending, (state) => {
             state.userInfo = null
             state.status = FetchTypes.LOADING

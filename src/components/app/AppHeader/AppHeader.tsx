@@ -4,12 +4,17 @@ import { FC, useEffect } from "react"
 
 import { Box, AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchUserInfo } from "@/redux/slices/userSlice";
+
 
 
 export const AppHeader: FC = () => {
+    const dispatch = useAppDispatch()
+    const userInfo = useAppSelector(state => state.user.userInfo)
 
     useEffect(() => {
-
+        dispatch(fetchUserInfo())
     }, [])
 
     return (
@@ -28,10 +33,11 @@ export const AppHeader: FC = () => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Supplementify
                 </Typography>
-                <div>
-
-                    <Button color="inherit">Login</Button>
-                </div>
+                {
+                    userInfo ?
+                   <div></div>
+                    : <Button color="inherit">Login</Button>
+                }
                 </Toolbar>
             </AppBar>
         </Box>

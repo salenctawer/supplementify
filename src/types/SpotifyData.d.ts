@@ -130,3 +130,23 @@ export interface SpotifyRecentlyPlayedData {
     limit: number
     next: string
 }
+
+export interface SpotifyUserData {
+    country: string
+    display_name: string
+    explicit_content: {
+        filter_enabled: boolean
+        filter_locked: boolean
+    }
+    external_urls: SpotifyExternalUrlsData
+    followers: {
+        href: string | null
+        total: number
+    }
+    href: string
+    id: string
+    images: SpotifyItemImagesData[]
+    product: string
+    type: string
+    uri: string
+}
