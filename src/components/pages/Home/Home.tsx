@@ -6,6 +6,8 @@ import styles from './Home.module.css'
 import { Button } from '@mui/material'
 import { useAuth } from '@/hooks/useAuth'
 
+import HomeAdvantages from '@/components/pages/Home/HomeAdvantages/HomeAdvantages'
+
 const Home: FC = () => {
     const { redirectToSpotifyLogin, accessStorageToken, setStoreToken, accessStoreToken } = useAuth()
 
@@ -21,6 +23,7 @@ const Home: FC = () => {
                 accessStoreToken ? 'You are already logged in' : 'Login with spotify'
             }
         </Button>
+        <HomeAdvantages />
     </main>
 }
 

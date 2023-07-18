@@ -44,24 +44,24 @@ export const AppHeader: FC = () => {
         <Box sx={{ flexGrow: 1, marginBottom: 4 }}>
             <AppBar position="static">
                 <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Supplementify
-                </Typography>
-                <DarkModeSwitch
-                    style={{ marginBottom: '2rem' }}
-                    checked={isDarkMode}
-                    onChange={toggleMode}
-                    size={120}
-                />
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        Supplementify
+                    </Typography>
+                    <DarkModeSwitch
+                        style={{ margin: 'auto 16px auto 0' }}
+                        checked={isDarkMode}
+                        onChange={toggleMode}
+                        size={24}
+                    />
                 {
                     userInfo ?
                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
