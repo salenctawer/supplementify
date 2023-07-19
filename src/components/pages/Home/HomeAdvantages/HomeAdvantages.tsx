@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Card, CardContent, Typography } from "@mui/material"
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material"
 import Link from "next/link"
 import styles from './HomeAdvantages.module.scss'
 import { useInView } from "react-intersection-observer"
@@ -28,24 +28,29 @@ export const HomeAdvantages = () => {
         },
     ]
     return (
-        <section className={styles.section} ref={ref}>
+        <section className={`${styles.section} ${(inView ? styles.isVisible : styles.isHidden)}`} ref={ref}>
+            <Typography variant="h2" component="h2" className={styles.title}>Supplemetify features</Typography>
+            <Grid container spacing={{ md: 3 }}>
             {
-                advantagesCards.map((item) => (
-                    <Card className={`${styles.card} ${(inView ? styles.isVisible : styles.isHidden)}`}> 
-                        <CardContent>
-                            <Typography>
-                                { item.title }
-                            </Typography>
-                            <Typography>
-                                { item.text }
-                            </Typography>
-                            <Link href={item.link} className={styles.link}>
-                                { item.buttonText }
-                            </Link>
-                        </CardContent>
-                    </Card>
+                advantagesCards.map((item, idx) => (
+                    <Grid item md={4} key={idx} className={styles.card}>
+                        <Card> 
+                            <CardContent>
+                                <Typography>
+                                    { item.title }
+                                </Typography>
+                                <Typography>
+                                    { item.text }
+                                </Typography>
+                                <Link href={item.link} className={styles.link}>
+                                    { item.buttonText }
+                                </Link>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 ))
             }
+            </Grid>
         </section>
     )
 }

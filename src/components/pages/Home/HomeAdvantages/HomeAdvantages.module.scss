@@ -1,5 +1,21 @@
 .section {
     position: relative;
+    margin-top: 1000px;
+
+    &.isVisible {
+      .card {
+        transform: translateY(-100px);
+        transition: all 1s ease-in-out;
+      }
+
+      .title {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid black;
+        animation: cursor 0.75s step-end infinite, printed_text 5s steps(29);
+      }
+    }
 }
 
 .link {
@@ -30,8 +46,29 @@
     }
 }
 
-.card {
-    &.isVisible {
-        background-color: blue;
-    }
+.title {
+  margin-bottom: 124px;
+  max-width: max-content;
+  width: 100%;
+  display: none;
 }
+
+@keyframes cursor {
+    0% {
+      border-color: black;
+    }
+  
+    50% {
+      border-color: transparent;
+    }
+  
+    100% {
+      border-color: black;
+    }
+  }
+  
+  @keyframes printed_text {
+    from {
+      width: 0;
+    }
+  }
