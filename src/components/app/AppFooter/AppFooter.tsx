@@ -88,11 +88,12 @@ export const AppFooter: FC = () => {
                                 <Typography>
                                     {footerItem.columnHeader}
                                 </Typography>
+                                <p>fsdfsdf</p>
                                 <Box sx={styles.itemsContainer}>
                                     {
                                         footerItem.items.map((item) => (
                                             item.isLink ? 
-                                            <Link target="_blank" href={item.itemLink} key={item.itemText}>
+                                            <Link target="_blank" href={item.itemLink} key={item.itemText} className="link">
                                                 {item.itemText}
                                             </Link> :
                                             <Button onClick={() => onNavigationClick(item.itemLink)} key={item.itemText}>
