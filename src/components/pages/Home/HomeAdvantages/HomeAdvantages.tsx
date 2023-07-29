@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material"
+import { Card, CardContent, Grid, Typography } from "@mui/material"
 import Link from "next/link"
 import styles from './HomeAdvantages.module.scss'
 import { useInView } from "react-intersection-observer"
@@ -26,23 +26,42 @@ export const HomeAdvantages = () => {
             link: '/artists',
             classModifier: 'is-artists'
         },
+        {
+            title: 'Recently played',
+            text: 'You can find out exactly to the second what tracks have been played in your headphones recently',
+            buttonText: 'View recents',
+            link: '/recents',
+            classModifier: 'is-recents',
+        }
     ]
+
+    const getCardStyle = (modifier: string) => {
+        if(modifier === 'is-tracks') {
+            return styles.tracksCard
+        }
+        else if(modifier === 'is-artists') {
+            return styles.artistsCard
+        }
+        
+        return styles.recentsCard
+    }
+
     return (
         <section className={`${styles.section} ${(inView ? styles.isVisible : styles.isHidden)}`} ref={ref}>
             <Typography variant="h2" component="h2" className={styles.title}>Supplemetify features</Typography>
             <Grid container spacing={{ md: 3 }}>
             {
                 advantagesCards.map((item, idx) => (
-                    <Grid item md={4} key={idx} className={styles.card}>
-                        <Card> 
+                    <Grid item md={4} key={idx} className={`${styles.itemCard} ${getCardStyle(item.classModifier)}`}>
+                        <Card className={styles.cardContainer}> 
                             <CardContent>
-                                <Typography>
+                                <Typography className={styles.cardTitle}>
                                     { item.title }
                                 </Typography>
-                                <Typography>
+                                <Typography className={styles.cardText}>
                                     { item.text }
                                 </Typography>
-                                <Link href={item.link} className={styles.link}>
+                                <Link href={item.link} className='link'>
                                     { item.buttonText }
                                 </Link>
                             </CardContent>

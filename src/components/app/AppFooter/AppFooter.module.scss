@@ -1,0 +1,12 @@
+.footerItem {
+    padding: 0;
+
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+.columnHeader {
+    margin-bottom: 16px;
+    font-size: 20px;
+}

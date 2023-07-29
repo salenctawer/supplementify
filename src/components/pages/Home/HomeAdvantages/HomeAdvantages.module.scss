@@ -1,11 +1,22 @@
 .section {
     position: relative;
     margin-top: 1000px;
+    margin-bottom: 248px;
 
     &.isVisible {
-      .card {
-        transform: translateY(-100px);
+      .tracksCard {
+        transform: translateY(100px);
+        transition: all 2s ease-in-out;
+      }
+
+      .artistsCard{
+        transform: translateY(50px);
         transition: all 1s ease-in-out;
+      }
+
+      .recentsCard {
+        transform: translateY(75px);
+        transition: all 3s ease-in-out;
       }
 
       .title {
@@ -18,36 +29,26 @@
     }
 }
 
-.link {
-    color: #1dbc55;
-    position: relative;
+.itemCard {
+  transform: translateY(300px);
+}
 
+.cardContainer {
+  border-radius: 16px;
+}
 
-    &::after {
-        background-color: currentcolor;
-        border-radius: 4px;
-        bottom: 0;
-        content: "";
-        height: 1px;
-        left: 0;
-        opacity: .3;
-        position: absolute;
-        right: 0;
-        transition: all .38s cubic-bezier(.76,0,.24,1);
-    }
+.cardTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
 
-    &:hover {
-        &::after {
-            height: 100%;
-            left: -2px;
-            right: -2px;
-            opacity: 0.1;
-        }
-    }
+.cardText {
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .title {
-  margin-bottom: 124px;
   max-width: max-content;
   width: 100%;
   display: none;

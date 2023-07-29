@@ -1,9 +1,10 @@
 'use client'
 
 import { FC, useMemo } from "react"
-import { Box, Button, Grid, Link, Typography } from "@mui/material"
+import { Box, Button, Grid, Typography } from "@mui/material"
 import { useAuth } from "@/hooks/useAuth"
 import { useRouter } from "next/navigation"
+import s from './AppFooter.module.scss'
 
 const styles = {
     root: {
@@ -17,7 +18,7 @@ const styles = {
         display: 'flex',
         alignItems: 'flex-start',
         flexDirection: 'column',
-    }
+    },
 }
 
 export const AppFooter: FC = () => {
@@ -65,15 +66,35 @@ export const AppFooter: FC = () => {
             columnHeader: 'Navigation',
             items: [
                 {
-                    itemText: 'Tracks',
+                    itemText: 'Top Tracks',
                     itemLink: '/favorit-tracks',
                     isLink: false,
                 },
                 {
-                    itemText: 'Artists',
+                    itemText: 'Top Artists',
                     itemLink: '/favorit-artists',
                     isLink: false,
                 },  
+                {
+                    itemText: 'Recently played',
+                    itemLink: '/recents',
+                    isLink: false,
+                }
+            ]
+        }, 
+        {
+            columnHeader: 'Socials',
+            items: [
+                {
+                    itemText: 'Instagram',
+                    itemLink: 'https://instagram.com/vlonesalenc',
+                    isLink: true,
+                },
+                {
+                    itemText: 'Twitter',
+                    itemLink: 'https://twitter.com/salencqua',
+                    isLink: true,
+                },
             ]
         }
     ]
@@ -85,18 +106,17 @@ export const AppFooter: FC = () => {
                     {
                         footerItems.map((footerItem, footerItemIdx) => (
                             <Grid item key={footerItemIdx} md={4}>
-                                <Typography>
+                                <Typography className={s.columnHeader}>
                                     {footerItem.columnHeader}
                                 </Typography>
-                                <p>fsdfsdf</p>
                                 <Box sx={styles.itemsContainer}>
                                     {
                                         footerItem.items.map((item) => (
                                             item.isLink ? 
-                                            <Link target="_blank" href={item.itemLink} key={item.itemText} className="link">
+                                            <a target="_blank" href={item.itemLink} key={item.itemText} className={`${s.footerItem} link`}>
                                                 {item.itemText}
-                                            </Link> :
-                                            <Button onClick={() => onNavigationClick(item.itemLink)} key={item.itemText}>
+                                            </a> :
+                                            <Button onClick={() => onNavigationClick(item.itemLink)} key={item.itemText} className={s.footerItem}>
                                                 {item.itemText}
                                             </Button>
                                         ))

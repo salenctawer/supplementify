@@ -13,15 +13,10 @@ import { ColorModeContext } from "@/styles/themeBuilder"
 
 
 export const AppSidebar: FC = () => {
-    const { toggleColorMode } = React.useContext(ColorModeContext)
     const router = useRouter()
     const sidebarTabs = useAppSelector(state => state.sidebar.sidebarAuthTabs)
 
     const onItemClick = (item: SidebarTabItemData) => {
-        if(!item.routeName) {
-           return toggleColorMode()
-        }
-
         router.push(item.routeName)
     }
 

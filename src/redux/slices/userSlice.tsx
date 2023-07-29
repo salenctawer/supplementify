@@ -9,9 +9,16 @@ export const fetchUserInfo = createAsyncThunk('/user/info', async() => {
 	return data
 })
 
+export const fetchAuthUser = createAsyncThunk('/user/auth', async() => {
+	const { data } = await spotifyApi.fetchAuthUser()
+
+	return data
+})
+
 const initialState = {
     accessToken: '',
 	userInfo: null as null | SpotifyUserData,
+    redirectUrl: '',
 	status: 'loading' as FetchTypes,
 }
 
@@ -35,6 +42,19 @@ const userSlice = createSlice({
         })
         builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
             state.userInfo = action.payload
+            state.status = FetchTypes.FULFILED
+        })
+        // authUser
+        builder.addCase(fetchAuthUser.pending, (state) => {
+            state.redirectUrl = ''
+            state.status = FetchTypes.LOADING
+        })
+        builder.addCase(fetchAuthUser.rejected, (state) => {
+            state.redirectUrl = ''
+            state.status = FetchTypes.REJECTED
+        })
+        builder.addCase(fetchAuthUser.fulfilled, (state, action) => {
+            state.redirectUrl = action.payload
             state.status = FetchTypes.FULFILED
         })
 	}
