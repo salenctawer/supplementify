@@ -1,7 +1,8 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { spotifyApi } from "@/api/api"
 import { FetchTypes } from "@/types/EnumsData"
 import { SpotifyUserData } from "@/types/SpotifyData"
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { LoginData } from "@/types/UserData"
 
 export const fetchUserInfo = createAsyncThunk('/user/info', async() => {
 	const { data } = await spotifyApi.fetchUserInfo()
@@ -9,10 +10,21 @@ export const fetchUserInfo = createAsyncThunk('/user/info', async() => {
 	return data
 })
 
-export const fetchAuthUser = createAsyncThunk('/user/auth', async() => {
-	const { data } = await spotifyApi.fetchAuthUser()
+export const fetchAuthUrl = createAsyncThunk('/user/authurl', async() => {
+	const { data } = await spotifyApi.fetchAuthUrl()
 
 	return data
+})
+
+export interface FetchLoginParams {
+    code: string
+    state: string
+}
+
+export const fetchLogin = createAsyncThunk('/user/login', async(params: FetchLoginParams) => {
+    const { data } = await spotifyApi.fetchLogin(params.code, params.state)
+
+    return data
 })
 
 const initialState = {
@@ -20,6 +32,7 @@ const initialState = {
 	userInfo: null as null | SpotifyUserData,
     redirectUrl: '',
 	status: 'loading' as FetchTypes,
+    loginData: null as null | LoginData
 }
 
 const userSlice = createSlice({
@@ -44,17 +57,30 @@ const userSlice = createSlice({
             state.userInfo = action.payload
             state.status = FetchTypes.FULFILED
         })
-        // authUser
-        builder.addCase(fetchAuthUser.pending, (state) => {
+        // authUrl
+        builder.addCase(fetchAuthUrl.pending, (state) => {
             state.redirectUrl = ''
             state.status = FetchTypes.LOADING
         })
-        builder.addCase(fetchAuthUser.rejected, (state) => {
+        builder.addCase(fetchAuthUrl.rejected, (state) => {
             state.redirectUrl = ''
             state.status = FetchTypes.REJECTED
         })
-        builder.addCase(fetchAuthUser.fulfilled, (state, action) => {
+        builder.addCase(fetchAuthUrl.fulfilled, (state, action) => {
             state.redirectUrl = action.payload
+            state.status = FetchTypes.FULFILED
+        })
+        // login
+        builder.addCase(fetchLogin.pending, (state) => {
+            state.loginData = null
+            state.status = FetchTypes.LOADING
+        })
+        builder.addCase(fetchLogin.rejected, (state) => {
+            state.loginData = null
+            state.status = FetchTypes.REJECTED
+        })
+        builder.addCase(fetchLogin.fulfilled, (state, action) => {
+            state.loginData = action.payload
             state.status = FetchTypes.FULFILED
         })
 	}

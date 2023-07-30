@@ -8,7 +8,8 @@ const PLAYLISTS_ENDPOINT = 'v1/me/playlists'
 const FAVORITE_TRACKS_ENDPOINT = 'v1/me/top/tracks'
 const RECENTLY_PLAYED_ENDPOINT = 'v1/me/player/recently-played'
 const USER_INFO_ENDPOINT = 'v1/me'
-const USER_AUTH = '/authurl'
+const AUTH_URL_ENDPOINT = '/authurl'
+const USER_LOGIN_ENDPOINT = '/login'
 
 export const spotifyApi = {
     fetchPlaylists() {
@@ -32,8 +33,16 @@ export const spotifyApi = {
     fetchUserInfo() {
         return instance.get(USER_INFO_ENDPOINT)
     },
-    fetchAuthUser() {
-        return instance.get(USER_AUTH)
+    fetchAuthUrl() {
+        return instance.get(AUTH_URL_ENDPOINT)
+    },
+    fetchLogin(code: string, state: string) {
+        return instance.get(USER_LOGIN_ENDPOINT, {
+            params: {
+                code,
+                state,
+            }
+        })
     }
 }
 

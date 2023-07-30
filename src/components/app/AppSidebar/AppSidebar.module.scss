@@ -1,13 +1,17 @@
 .sidebar {
     position: fixed;
     background: #1D1C21;
+    overflow: hidden;
     border-radius: 16px;
     top: 60px;
     left: 60px;
     padding: 16px;
-    transition: .3s ease all;
+    transition: .3s ease-in-out all;
+    width: 72px;
 
     &:hover {
+        width: 240px;
+        
         .itemText {
             display: block;
         }
@@ -17,7 +21,7 @@
 .item {
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding: 8px;
     transition: .3s ease all;
     cursor: pointer;
     border-radius: 8px;
@@ -27,11 +31,16 @@
     &:hover {
         background: #abb8c3;
     }
+
+    &:not(:last-child) {
+        margin-bottom: 8px;
+    }
 }
 
 .itemText {
     margin-left: 8px;
-    font-size: 24px;
+    font-size: 16px;
     color: white;
     display: none;
+    white-space: nowrap;
 }

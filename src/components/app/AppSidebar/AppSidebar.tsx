@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { SidebarTabItemData } from "@/types/SidebarData"
 
 import { IconComponent } from "@/components/ui/IconComponent/IconComponent"
-import { Button } from "@mui/material"
+import { Button, Typography, Box } from "@mui/material"
 
 import styles from './AppSidebar.module.scss'
 import { ColorModeContext } from "@/styles/themeBuilder"
@@ -20,14 +20,14 @@ export const AppSidebar: FC = () => {
         router.push(item.routeName)
     }
 
-    return <div className={styles.sidebar}>
+    return <Box className={styles.sidebar}>
         {sidebarTabs.map((item) => (
             <Button onClick={() => onItemClick(item)} className={styles.item} key={item.name}>
                 <IconComponent iconName={item.icon} />
-                <div className={styles.itemText}>{item.name}</div>
+                <Typography className={styles.itemText}>{item.name}</Typography>
             </Button>
         ))}
-    </div>
+    </Box>
 }
 
 export default AppSidebar
