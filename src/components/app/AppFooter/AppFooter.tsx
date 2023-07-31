@@ -22,7 +22,7 @@ const styles = {
 }
 
 export const AppFooter: FC = () => {
-    const {accessStorageToken, accessStoreToken} = useAuth()
+    const { isAuth } = useAuth()
     const router = useRouter()
 
     const homeIntro = document.getElementById('intro')
@@ -41,10 +41,6 @@ export const AppFooter: FC = () => {
 
         return scrollToIntro()
     }
-
-    const isAuth = useMemo(() => {
-        return accessStorageToken && accessStoreToken
-    }, [accessStorageToken, accessStoreToken])
 
     const footerItems = [
         {

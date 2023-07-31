@@ -28,7 +28,6 @@ export const fetchLogin = createAsyncThunk('/user/login', async(params: FetchLog
 })
 
 const initialState = {
-    accessToken: '',
 	userInfo: null as null | SpotifyUserData,
     redirectUrl: '',
 	status: 'loading' as FetchTypes,
@@ -39,8 +38,8 @@ const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		setAccessToken: (state, action) => {
-			state.accessToken = action.payload
+		setLoginData: (state, action) => {
+			state.loginData = action.payload
 		}
 	},
 	extraReducers: (builder) => {

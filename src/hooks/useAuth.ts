@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { useAppSelector, useActionCreators } from "@/redux/hooks"
 import { allUserActions } from "@/redux/slices/userSlice"
 import { useRouter } from 'next/navigation'
@@ -5,66 +6,36 @@ import { useRouter } from 'next/navigation'
 export const useAuth = () => {
     const router = useRouter()
     const authActions = useActionCreators(allUserActions)
-    const accessStoreToken = useAppSelector(state => state.user.accessToken) || ''
-    const accessStorageToken = window.localStorage.getItem('accessToken')
+    const loginData = useAppSelector(state => state.user.loginData) || ''
+    const accessToken = window.localStorage.getItem('accessToken')
+    const refreshToken = window.localStorage.getItem('refreshToken')
+    const tokenType = window.localStorage.getItem('tokenType')
+    const expiry = window.localStorage.getItem('expiry')
 
-    const getStorageToken = () => {
-        const parsedHash = new URLSearchParams(window.location.hash)
-        const accessToken = parsedHash.get('#access_token') || ''
-
-        return accessToken
-    }
-
-    const setStoreToken = (token: string) => {
-        authActions.setAccessToken(token)
-    }
-    
-    const setAccessTokenToAll = () => {
-        const accessToken = getStorageToken()
-        localStorage.clear()
-        localStorage.setItem('accessToken', accessToken)
-
-        setStoreToken(accessToken)
-    }
-
-    const redirectToSpotifyLogin = () => {
-        const query = new URLSearchParams({
-            response_type: String(process.env.NEXT_PUBLIC_RESPONSE_TYPE),
-            client_id: String(process.env.NEXT_PUBLIC_CLIENT_ID),
-            redirect_uri: process.env.NODE_ENV === 'development' ? String(process.env.NEXT_PUBLIC_REDIRECT_DEV_URI) : String(process.env.NEXT_PUBLIC_REDIRECT_PROD_URI),
-            scope: String(process.env.NEXT_PUBLIC_SCOPES)
+    const setStoreLoginData = () => {
+        authActions.setLoginData({
+            access_token: accessToken,
+            token_type: tokenType,
+            refresh_token: refreshToken,
+            expiry
         })
-
-        router.push("https://accounts.spotify.com/authorize?" + query.toString())
     }
-    
+
     const logout = () => {
-        setStoreToken('')
-        localStorage.setItem('accessToken', '')
+        authActions.setLoginData('')
+        localStorage.setItem('loginStorageData', '')
         router.push('/')
     }
 
-    const isAuthCheck = () => {
-        if(!accessStoreToken) {
-
-            if(!accessStorageToken) {
-                return router.push('/login')
-            }
-
-            else {
-                return setStoreToken(accessStorageToken)
-            }
-        }
-    }
+    const isAuth = useMemo(() => {
+        return loginData && accessToken
+    }, [loginData, accessToken])
 
     return {
-        accessStoreToken,
-        accessStorageToken,
-        redirectToSpotifyLogin,
-        setAccessTokenToAll,
-        setStoreToken,
+        loginData,
+        accessToken,
+        isAuth,
         logout,
-        isAuthCheck,
-
+        setStoreLoginData,
     }
 }

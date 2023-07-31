@@ -19,14 +19,14 @@ export const AppHeader: FC = () => {
     const { toggleColorMode } = React.useContext(ColorModeContext)
     const dispatch = useAppDispatch()
     const userInfo = useAppSelector(state => state.user.userInfo)
-    const { redirectToSpotifyLogin, accessStorageToken, accessStoreToken } = useAuth()
+    const { isAuth } = useAuth()
     const router = useRouter()
 
     useEffect(() => {
-        if(accessStorageToken && accessStoreToken) {
+        if(isAuth) {
             dispatch(fetchUserInfo())
         }
-    }, [accessStorageToken, accessStoreToken])
+    }, [isAuth])
 
     const isDarkMode = useMemo(() => {
         return theme.palette.mode === ModeTypes.DARK
@@ -71,7 +71,7 @@ export const AppHeader: FC = () => {
                         <Button color="inherit" onClick={onLogoutClick}>Logout</Button>
                     </Box>
                    </Box>
-                    : <Button color="inherit" onClick={() => redirectToSpotifyLogin()}>Login</Button>
+                    : <Button color="inherit">Login</Button>
                 }
                 </Toolbar>
             </AppBar>

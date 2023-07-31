@@ -1,29 +1,45 @@
 'use client'
 
 import { FC, useEffect } from "react"
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from "@/hooks/useAuth"
+import { useAppDispatch } from "@/redux/hooks"
+import { fetchLogin } from "@/redux/slices/userSlice"
 
 
 export const Login: FC = () => {
-    const { accessStoreToken, setAccessTokenToAll, redirectToSpotifyLogin } = useAuth()
+    const { isAuth } = useAuth()
     const router = useRouter()
+    const searchParams = useSearchParams()
+    const dispatch = useAppDispatch()
+
+    const getLoginData = async(code: string, state: string) => {
+        const data = await dispatch(fetchLogin({
+            code,
+            state
+        }))
+
+        if(data.payload) {
+            localStorage.setItem('accessToken', data.payload.access_token)
+            localStorage.setItem('refreshToken', data.payload.refresh_token)
+            localStorage.setItem('expiry', data.payload.expiry)
+            localStorage.setItem('token_type', data.payload.token_type)
+            router.push('/')
+        }
+    }
     
     useEffect(() => {
-        if(accessStoreToken) {
-            return router.push('/')
-        }
+        const code = searchParams.get('code') ?? ''
+        const state = searchParams.get('state') ?? ''
 
-        if(location.hash) {
-            setAccessTokenToAll()
-
+        if(isAuth) {
             return router.push('/')
         }
 
         else {
-            redirectToSpotifyLogin()
+            getLoginData(code, state)
         }
-    }, [location.hash, accessStoreToken])
+    }, [])
 
     return <div>Login</div>
 }

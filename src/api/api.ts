@@ -7,7 +7,7 @@ const instance = axios.create({
 const PLAYLISTS_ENDPOINT = 'v1/me/playlists'
 const FAVORITE_TRACKS_ENDPOINT = 'v1/me/top/tracks'
 const RECENTLY_PLAYED_ENDPOINT = 'v1/me/player/recently-played'
-const USER_INFO_ENDPOINT = 'v1/me'
+const USER_INFO_ENDPOINT = '/userinfo'
 const AUTH_URL_ENDPOINT = '/authurl'
 const USER_LOGIN_ENDPOINT = '/login'
 
@@ -31,7 +31,13 @@ export const spotifyApi = {
         })
     },
     fetchUserInfo() {
-        return instance.get(USER_INFO_ENDPOINT)
+        return instance.get(USER_INFO_ENDPOINT, {
+            params: {
+                refresh_token: localStorage.getItem('refreshToken'),
+                token_type: localStorage.getItem('tokenType'),
+                expiry: localStorage.getItem('expiry')
+            }
+        })
     },
     fetchAuthUrl() {
         return instance.get(AUTH_URL_ENDPOINT)
@@ -46,22 +52,11 @@ export const spotifyApi = {
     }
 }
 
-// instance.interceptors.request.use((config: any) => { //TODO: типизировать
-//     config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
-//     return config;
-// })
+instance.interceptors.request.use((config: any) => { //TODO: типизировать
+    if(window.localStorage.getItem('accessToken')) {
+        config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
+        return config;
+    }
 
-// instance.interceptors.response.use((response: any) => {
-//     return response
-// }, async function(error) { // по другому рефрешить токен, пока это временная затычка
-//     if(error.response.data.error.message === 'The access token expired') {
-//         const queryString = new URLSearchParams({
-//             response_type: String(process.env.NEXT_PUBLIC_RESPONSE_TYPE),
-//             client_id: String(process.env.NEXT_PUBLIC_CLIENT_ID),
-//             redirect_uri: process.env.NODE_ENV === 'development' ? String(process.env.NEXT_PUBLIC_REDIRECT_DEV_URI) : String(process.env.NEXT_PUBLIC_REDIRECT_PROD_URI),
-//             scope: String(process.env.NEXT_PUBLIC_SCOPES)
-//         }).toString()
-
-//        return location.href = `https://accounts.spotify.com/authorize?${queryString}`
-//     }
-// })
+    return config
+})
