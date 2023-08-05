@@ -1,9 +1,8 @@
 'use client'
 
-import React, { FC, useEffect, useMemo } from "react"
+import React, { FC, useEffect, useMemo, useRef, useState } from "react"
 
-import { Box, AppBar, Toolbar, IconButton, Typography, Button, Avatar, useTheme } from "@mui/material"
-import MenuIcon from '@mui/icons-material/Menu';
+import { Box, AppBar, Toolbar, Typography, Button, Avatar, useTheme } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchUserInfo } from "@/redux/slices/userSlice";
 import { useAuth } from "@/hooks/useAuth";
@@ -13,17 +12,21 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { ColorModeContext } from "@/styles/themeBuilder"
 import { ModeTypes } from "@/types/EnumsData";
 
+import styles from './AppHeader.module.scss'
+
 
 export const AppHeader: FC = () => {
     const theme = useTheme()
+    const headerElement = useRef()
     const { toggleColorMode } = React.useContext(ColorModeContext)
     const dispatch = useAppDispatch()
     const userInfo = useAppSelector(state => state.user.userInfo)
     const { isAuth } = useAuth()
     const router = useRouter()
+    const [scrollTop, setScrollTop] = useState(0);
 
     useEffect(() => {
-        if(isAuth) {
+        if (isAuth) {
             dispatch(fetchUserInfo())
         }
     }, [isAuth])
@@ -31,6 +34,18 @@ export const AppHeader: FC = () => {
     const isDarkMode = useMemo(() => {
         return theme.palette.mode === ModeTypes.DARK
     }, [theme.palette.mode])
+
+    useEffect(() => {
+        const handleScroll = () => {
+          setScrollTop(window.scrollY);
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
 
     const onLogoutClick = () => {
         router.push('/logout')
@@ -41,18 +56,9 @@ export const AppHeader: FC = () => {
     }
 
     return (
-        <Box sx={{ flexGrow: 1, marginBottom: 4 }}>
-            <AppBar position="static">
+    <Box className={`container ${scrollTop !== 0 ? styles.headerFixed : styles.header}`} ref={headerElement} >
+            <AppBar position="static" sx={{ borderRadius: theme.shape }}>
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Supplementify
                     </Typography>
@@ -62,17 +68,17 @@ export const AppHeader: FC = () => {
                         onChange={toggleMode}
                         size={24}
                     />
-                {
-                    userInfo ?
-                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar src={userInfo.images[0].url}/>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                        { userInfo.display_name }
-                        <Button color="inherit" onClick={onLogoutClick}>Logout</Button>
-                    </Box>
-                   </Box>
-                    : <Button color="inherit">Login</Button>
-                }
+                    {
+                        userInfo ?
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <Avatar src={userInfo.images[0].url} />
+                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    {userInfo.display_name}
+                                    <Button color="inherit" onClick={onLogoutClick}>Logout</Button>
+                                </Box>
+                            </Box>
+                            : <Button color="inherit">Login</Button>
+                    }
                 </Toolbar>
             </AppBar>
         </Box>

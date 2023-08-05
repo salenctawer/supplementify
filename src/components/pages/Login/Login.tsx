@@ -23,7 +23,7 @@ export const Login: FC = () => {
             localStorage.setItem('accessToken', data.payload.access_token)
             localStorage.setItem('refreshToken', data.payload.refresh_token)
             localStorage.setItem('expiry', data.payload.expiry)
-            localStorage.setItem('token_type', data.payload.token_type)
+            localStorage.setItem('tokenType', data.payload.token_type)
             router.push('/')
         }
     }

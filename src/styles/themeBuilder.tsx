@@ -10,7 +10,7 @@ const manrope = Manrope({ subsets: ['latin'], display: 'swap' })
 
 const getDesignTokens = (mode: PaletteMode, isMobileDevice: boolean) => ({
     shape: {
-        borderRadius: 8,
+        borderRadius: 16,
     },
     palette: {
         mode,

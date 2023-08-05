@@ -18,7 +18,7 @@ export const HomeIntro = () => {
         if (accessToken && !loginData) {
             setStoreLoginData()
         }
-    }, [])
+    }, [accessToken, loginData])
 
     const onLoginClick = async () => {
         const data = await dispatch(fetchAuthUrl())

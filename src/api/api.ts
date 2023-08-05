@@ -31,12 +31,10 @@ export const spotifyApi = {
         })
     },
     fetchUserInfo() {
-        return instance.get(USER_INFO_ENDPOINT, {
-            params: {
-                refresh_token: localStorage.getItem('refreshToken'),
-                token_type: localStorage.getItem('tokenType'),
-                expiry: localStorage.getItem('expiry')
-            }
+        return instance.post(USER_INFO_ENDPOINT, {
+            refresh_token: localStorage.getItem('refreshToken'),
+            token_type: localStorage.getItem('tokenType'),
+            expiry: localStorage.getItem('expiry')
         })
     },
     fetchAuthUrl() {
