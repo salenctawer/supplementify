@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC, useEffect, useMemo, useRef, useState } from "react"
+import React, { FC, useEffect, useMemo, useState } from "react"
 
 import { Box, AppBar, Toolbar, Typography, Button, Avatar, useTheme } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -17,7 +17,6 @@ import styles from './AppHeader.module.scss'
 
 export const AppHeader: FC = () => {
     const theme = useTheme()
-    const headerElement = useRef()
     const { toggleColorMode } = React.useContext(ColorModeContext)
     const dispatch = useAppDispatch()
     const userInfo = useAppSelector(state => state.user.userInfo)
@@ -56,7 +55,7 @@ export const AppHeader: FC = () => {
     }
 
     return (
-    <Box className={`container ${scrollTop !== 0 ? styles.headerFixed : styles.header}`} ref={headerElement} >
+    <Box className={`container ${scrollTop > 64 ? styles.headerFixed : styles.header}`} >
             <AppBar position="static" sx={{ borderRadius: theme.shape }}>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

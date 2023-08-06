@@ -31,11 +31,13 @@ export const spotifyApi = {
         })
     },
     fetchUserInfo() {
-        return instance.post(USER_INFO_ENDPOINT, {
+        const data = {
             refresh_token: localStorage.getItem('refreshToken'),
             token_type: localStorage.getItem('tokenType'),
             expiry: localStorage.getItem('expiry')
-        })
+        }
+
+        return instance.post(USER_INFO_ENDPOINT, data)
     },
     fetchAuthUrl() {
         return instance.get(AUTH_URL_ENDPOINT)
@@ -53,6 +55,7 @@ export const spotifyApi = {
 instance.interceptors.request.use((config: any) => { //TODO: типизировать
     if(window.localStorage.getItem('accessToken')) {
         config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
+        config.headers['Content-Type'] = 'multipart/form-data; charset=utf-8'
         return config;
     }
 
