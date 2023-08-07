@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 export const useAuth = () => {
     const router = useRouter()
     const authActions = useActionCreators(allUserActions)
-    const loginData = useAppSelector(state => state.user.loginData) || ''
+    const loginData = useAppSelector(state => state.user.loginData)
     const accessToken = window.localStorage.getItem('accessToken')
     const refreshToken = window.localStorage.getItem('refreshToken')
     const tokenType = window.localStorage.getItem('tokenType')
@@ -22,8 +22,9 @@ export const useAuth = () => {
     }
 
     const logout = () => {
-        authActions.setLoginData('')
-        localStorage.setItem('loginStorageData', '')
+        authActions.setLoginData(null)
+        console.log(localStorage)
+        localStorage.setItem('accessToken', '')
         router.push('/')
     }
 

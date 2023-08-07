@@ -11,7 +11,6 @@ export const Logout: FC = () => {
     
     useEffect(() => {
         logout()
-        router.push('/')
     })
 
     return <div>Logout</div>

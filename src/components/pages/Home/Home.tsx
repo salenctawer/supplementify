@@ -6,7 +6,7 @@ import HomeAdvantages from '@/components/pages/Home/HomeAdvantages/HomeAdvantage
 import HomeIntro from '@/components/pages/Home/HomeIntro/HomeIntro'
 
 const Home: FC = () => {
-    return <main className={styles.main}>
+    return <main className='container'>
         <HomeIntro />
         <HomeAdvantages />
     </main>

@@ -4,8 +4,8 @@ import { FetchTypes } from "@/types/EnumsData"
 import { SpotifyUserData } from "@/types/SpotifyData"
 import { LoginData } from "@/types/UserData"
 
-export const fetchUserInfo = createAsyncThunk('/user/info', async() => {
-	const { data } = await spotifyApi.fetchUserInfo()
+export const fetchUserInfo = createAsyncThunk('/user/info', async(body: LoginData | null) => {
+	const { data } = await spotifyApi.fetchUserInfo(body)
 
 	return data
 })
@@ -39,7 +39,16 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setLoginData: (state, action) => {
-			state.loginData = action.payload
+            if(!action.payload) {
+                state.loginData = null
+            }
+            else if(action.payload.access_token && action.payload.token_type && action.payload.refresh_token && action.payload.expiry) {
+                state.loginData = action.payload
+            }
+            else {
+                state.loginData = null
+            }
+			
 		}
 	},
 	extraReducers: (builder) => {

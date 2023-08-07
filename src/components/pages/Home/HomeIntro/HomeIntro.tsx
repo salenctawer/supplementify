@@ -31,12 +31,12 @@ export const HomeIntro = () => {
     }
 
     return (
-        <section id="intro">
-            <Button onClick={onLoginClick} color="primary" variant="contained" disabled={!!loginData}>
-                {
-                    loginData ? 'You are already logged in' : 'Login with spotify'
-                }
-            </Button>
+        <section id="intro" className="sectionContainer">
+                <Button onClick={onLoginClick} color="primary" variant="contained" disabled={!!loginData}>
+                    {
+                        loginData ? 'You are already logged in' : 'Login with spotify'
+                    }
+                </Button>
         </section>
     )
 }

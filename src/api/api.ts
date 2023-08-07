@@ -1,3 +1,4 @@
+import { LoginData } from '@/types/UserData'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -30,11 +31,11 @@ export const spotifyApi = {
             }
         })
     },
-    fetchUserInfo() {
+    fetchUserInfo(body: LoginData | null) {
         const data = {
-            refresh_token: localStorage.getItem('refreshToken'),
-            token_type: localStorage.getItem('tokenType'),
-            expiry: localStorage.getItem('expiry')
+            refresh_token: body?.refresh_token,
+            token_type: body?.token_type,
+            expiry: body?.expiry
         }
 
         return instance.post(USER_INFO_ENDPOINT, data)

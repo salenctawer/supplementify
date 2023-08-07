@@ -7,9 +7,12 @@ const useMedia = () => {
 
     const lgSize = useMediaQuery(theme.breakpoints.up('lg'))
 
+    const xlSize = useMediaQuery(theme.breakpoints.up('xl'))
+
     return {
         mdSize,
         lgSize,
+        xlSize,
     }
 }
 

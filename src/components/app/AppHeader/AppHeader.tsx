@@ -20,13 +20,13 @@ export const AppHeader: FC = () => {
     const { toggleColorMode } = React.useContext(ColorModeContext)
     const dispatch = useAppDispatch()
     const userInfo = useAppSelector(state => state.user.userInfo)
-    const { isAuth } = useAuth()
+    const { isAuth, loginData } = useAuth()
     const router = useRouter()
     const [scrollTop, setScrollTop] = useState(0);
 
     useEffect(() => {
         if (isAuth) {
-            dispatch(fetchUserInfo())
+            dispatch(fetchUserInfo(loginData))
         }
     }, [isAuth])
 
