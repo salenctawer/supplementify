@@ -22,7 +22,7 @@ export const AppSidebar: FC = () => {
         router.push(item.routeName)
     }
 
-    return <Box className={styles.sidebar}>
+    return <Box className={xlSize ? styles.sidebarDesktop : styles.sidebar}>
         {sidebarTabs.map((item) => (
             <Button onClick={() => onItemClick(item)} className={styles.item} key={item.name}>
                 <IconComponent iconName={item.icon} />

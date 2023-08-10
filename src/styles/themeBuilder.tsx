@@ -35,6 +35,11 @@ const getDesignTokens = (mode: PaletteMode, isMobileDevice: boolean) => ({
         fontSize: isMobileDevice ? 12 : 14,
         fontFamily: manrope.style.fontFamily,
     },
+    breakpoints: {
+        values: { //TODO custom breakpoints
+            xl: 1850,
+        }
+    },
     components: {
         MuiCssBaseline: {
             styleOverrides: {

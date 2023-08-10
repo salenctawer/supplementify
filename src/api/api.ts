@@ -33,8 +33,8 @@ export const spotifyApi = {
     },
     fetchUserInfo(body: LoginData | null) {
         const data = {
-            refresh_token: body?.refresh_token,
             token_type: body?.token_type,
+            refresh_token: body?.refresh_token,
             expiry: body?.expiry
         }
 
@@ -57,6 +57,8 @@ instance.interceptors.request.use((config: any) => { //TODO: типизиров�
     if(window.localStorage.getItem('accessToken')) {
         config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
         config.headers['Content-Type'] = 'multipart/form-data; charset=utf-8'
+
+        console.log(config.headers['Content-Type'])
         return config;
     }
 

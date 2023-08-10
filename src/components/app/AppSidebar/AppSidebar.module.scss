@@ -1,4 +1,4 @@
-.sidebar {
+.sidebarDesktop{
     position: fixed;
     background: #1D1C21;
     overflow: hidden;
@@ -8,6 +8,27 @@
     padding: 16px;
     transition: .3s ease-in-out all;
     width: 72px;
+
+    &:hover {
+        width: 240px;
+        
+        .itemText {
+            opacity: 1;
+        }
+    }
+}
+
+.sidebar {
+    position: fixed;
+    background: #1D1C21;
+    left: 0;
+    top: 0;
+    height: 100%;
+    transition: .3s ease-in-out all;
+    width: 72px;
+    z-index: 101;
+    padding: 16px;
+    border-radius: 16px;
 
     &:hover {
         width: 240px;
