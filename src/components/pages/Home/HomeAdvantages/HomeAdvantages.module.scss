@@ -1,6 +1,5 @@
 .section {
     position: relative;
-    margin-top: 1000px;
     margin-bottom: 248px;
 
     &.isVisible {
@@ -15,7 +14,7 @@
       }
 
       .recentsCard {
-        transform: translateY(75px);
+        transform: translateY(100px);
         transition: all 3s ease-in-out;
       }
 

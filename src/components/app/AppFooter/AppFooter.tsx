@@ -13,6 +13,7 @@ const styles = {
     content: {
         padding: '40px 96px',
         margin: '0 auto',
+        maxWidth: '1400px'
     }, 
     itemsContainer: {
         display: 'flex',
