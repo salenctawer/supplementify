@@ -38,6 +38,10 @@ const getDesignTokens = (mode: PaletteMode, isMobileDevice: boolean) => ({
     breakpoints: {
         values: { //TODO custom breakpoints
             xl: 1850,
+            lg: 1200,
+            md: 900,
+            sm: 600,
+            xs: 350,
         }
     },
     components: {
