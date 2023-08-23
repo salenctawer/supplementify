@@ -1,3 +1,16 @@
 .item {
     border-radius: 8px;
+    width: 100%;
+    height: auto;
+    animation: visibility 1s ease-in-out;
+}
+
+@keyframes visibility {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

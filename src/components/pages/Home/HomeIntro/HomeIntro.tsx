@@ -51,10 +51,10 @@ export const HomeIntro = () => {
     return (
         <section id="intro" className="sectionContainer">
             <Box sx={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
-                <Typography variant='h2'>
+                <Typography variant='h2'component="h1" fontWeight="bold">
                     Discover the hidden features of spotify and enjoy your stats
                 </Typography>
-                <Button sx={{marginBottom: '48px'}} onClick={onLoginClick} color="primary" variant="contained" disabled={!!loginData}>
+                <Button size="large" sx={{margin: '48px 0'}} onClick={onLoginClick} color="primary" variant="contained" disabled={!!loginData}>
                     {
                         loginData ? 'You are already logged in' : 'Login with spotify'
                     }
@@ -62,14 +62,13 @@ export const HomeIntro = () => {
                     <Grid container spacing={2}>
                     {
                         imagesList.map((item, idx) => (
-                            <Grid item xs={2} md={4} key={idx}>
+                            <Grid item xs={6} md={4} key={idx}>
                                 <Image
                                     className={styles.item}
                                     src={item.img}
                                     width={0}
                                     height={0}
                                     sizes="100%"
-                                    style={{ width: '100%', height: 'auto' }} 
                                     alt={item.title}
                                 />
                             </Grid>
