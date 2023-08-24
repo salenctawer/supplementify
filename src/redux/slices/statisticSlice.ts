@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { spotifyApi } from '@/api/api'
-import { SpotifyFavoriteTracksData, SpotifyPlaylistsData, SpotifyRecentlyPlayedData } from "@/types/SpotifyData";
+import { SpotifyTracksItemData, SpotifyPlaylistsData, SpotifyRecentlyPlayedData } from "@/types/SpotifyData";
 import { FetchTypes } from "@/types/EnumsData";
+import { LoginData } from "@/types/UserData";
 
 export interface FetchFavoriteTracksParamsData {
     limit: number
@@ -13,9 +14,13 @@ export const fetchPlaylists = createAsyncThunk('/user/playlists', async () => {
     return data
 })
 
+export interface FetchFavoriteTracksData {
+    loginData: LoginData | null
+    params: FetchFavoriteTracksParamsData
+}
 
-export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', async (params: FetchFavoriteTracksParamsData) => {
-    const { data } = await spotifyApi.fetchFavoriteTracks(params.limit, params.timeRange)
+export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', async (payloadData: FetchFavoriteTracksData) => {
+    const { data } = await spotifyApi.fetchFavoriteTracks(payloadData.loginData, payloadData.params)
     return data
 })
 
@@ -26,7 +31,7 @@ export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async (lim
 
 const initialState = {
     playlistsData: null as null | SpotifyPlaylistsData,
-    favoriteTracksData: null as null | SpotifyFavoriteTracksData,
+    favoriteTracksData: [] as SpotifyTracksItemData[],
     recentlyPlayedData: null as null | SpotifyRecentlyPlayedData,
     status: 'loading' as FetchTypes,
     error: null as null | Error

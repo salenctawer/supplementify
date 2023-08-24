@@ -1,3 +1,4 @@
+import { FetchFavoriteTracksParamsData } from '@/redux/slices/statisticSlice'
 import { LoginData } from '@/types/UserData'
 import axios from 'axios'
 
@@ -16,11 +17,17 @@ export const spotifyApi = {
     fetchPlaylists() {
         return instance.get(PLAYLISTS_ENDPOINT)
     },
-    fetchFavoriteTracks(limit: number, timeRange: string) {
-        return instance.get(FAVORITE_TRACKS_ENDPOINT, {
+    fetchFavoriteTracks(loginData: LoginData | null, params: FetchFavoriteTracksParamsData) {
+        const data = {
+            token_type: loginData?.token_type,
+            refresh_token: loginData?.refresh_token,
+            expiry: loginData?.expiry
+        }
+        
+        return instance.post(FAVORITE_TRACKS_ENDPOINT, data, {
             params: {
-                limit,
-                time_range: timeRange
+                limit: params.limit,
+                time_range: params.timeRange,
             }
         })
     },
@@ -54,7 +61,7 @@ export const spotifyApi = {
 }
 
 instance.interceptors.request.use((config: any) => { //TODO: типизировать
-    if(window.localStorage.getItem('accessToken')) {
+    if (window.localStorage.getItem('accessToken')) {
         config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
         config.headers['Content-Type'] = 'multipart/form-data; charset=utf-8'
 

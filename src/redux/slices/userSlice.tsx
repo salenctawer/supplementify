@@ -41,12 +41,14 @@ const userSlice = createSlice({
 		setLoginData: (state, action) => {
             if(!action.payload) {
                 state.loginData = null
+                state.userInfo = null
             }
             else if(action.payload.access_token && action.payload.token_type && action.payload.refresh_token && action.payload.expiry) {
                 state.loginData = action.payload
             }
             else {
                 state.loginData = null
+                state.userInfo = null
             }
 			
 		}

@@ -98,15 +98,15 @@ export interface SpotifyTracksItemData {
     uri: string
 }
 
-export interface SpotifyFavoriteTracksData {
-    href: string
-    limit: number
-    next: string
-    offset: number
-    previous: string
-    total: number
-    items: SpotifyTracksItemData[]
-}
+// export interface SpotifyFavoriteTracksData {
+//     href: string
+//     limit: number
+//     next: string
+//     offset: number
+//     previous: string
+//     total: number
+//     items: SpotifyTracksItemData[]
+// }
 
 export interface SpotifyRecentlyPlayedItemData {
     context: {

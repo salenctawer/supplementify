@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { fetchFavoriteTracks } from "@/redux/slices/statisticSlice"
+import { useAuth } from "@/hooks/useAuth"
 import { FetchTypes } from "@/types/EnumsData"
 
 import ItemsTable from "@/components/ui/ItemsTable/ItemsTable"
@@ -13,6 +14,7 @@ import { PageProvider } from "@/components/PageProvider/PageProvider"
 
 export const FavoriteTracks: FC = () => {
     const dispatch = useAppDispatch()
+    const {loginData} = useAuth()
     const favoriteTracksData = useAppSelector(state => state.statistic.favoriteTracksData)
     const error = useAppSelector(state => state.statistic.error)
     const fetchStatus = useAppSelector(state => state.statistic.status)
@@ -30,7 +32,10 @@ export const FavoriteTracks: FC = () => {
     })
 
     useEffect(() => {
-        dispatch(fetchFavoriteTracks(params))
+        dispatch(fetchFavoriteTracks({
+            loginData, 
+            params
+        }))
 
     }, [params])
 
@@ -48,7 +53,7 @@ export const FavoriteTracks: FC = () => {
                 fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
                 <ItemsTable rows={rows}>
                     {
-                        favoriteTracksData?.items.map((track, index) => (
+                        favoriteTracksData.map((track, index) => (
                             <FavoriteTrackItem trackItem={track} index={index} key={index}/>
                         ))
                     }
