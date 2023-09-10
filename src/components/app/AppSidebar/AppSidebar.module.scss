@@ -26,7 +26,8 @@
     width: 72px;
     z-index: 101;
     padding: 16px;
-    border-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
 
     &:hover {
         width: 240px;

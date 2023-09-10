@@ -17,6 +17,8 @@ export const HomeIntro = () => {
 
     const { accessToken, loginData, setStoreLoginData } = useAuth()
 
+    const userInfo = useAppSelector(state => state.user.userInfo)
+
     useEffect(() => {
         if (accessToken && !loginData) {
             setStoreLoginData()
@@ -46,6 +48,18 @@ export const HomeIntro = () => {
             img: '/lil-uzi-album.png',
             title: 'Lil Uzi Vert - Luv Is Rage 2'
         },
+        {
+            img: '/radiohead-album.jpg',
+            title: 'Radiohead - Pablo Honey'
+        }, 
+        {
+            img: '/deftones-album.jpg',
+            title: 'Deftones - Around the Fur',
+        }, 
+        {
+            img: '/nirvana-album.jpg',
+            title: 'Nirvana - Nevermind'
+        }
     ]
 
     return (
@@ -54,9 +68,9 @@ export const HomeIntro = () => {
                 <Typography variant='h2'component="h1" fontWeight="bold">
                     Discover the hidden features of spotify and enjoy your stats
                 </Typography>
-                <Button size="large" sx={{margin: '48px 0'}} onClick={onLoginClick} color="primary" variant="contained" disabled={!!loginData}>
+                <Button size="large" sx={{margin: '48px 0'}} onClick={onLoginClick} color="primary" variant="contained" disabled={!!userInfo}>
                     {
-                        loginData ? 'You are already logged in' : 'Login with spotify'
+                        userInfo ? 'You are already logged in' : 'Login with spotify'
                     }
                 </Button>
                     <Grid container spacing={2}>

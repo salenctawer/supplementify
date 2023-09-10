@@ -26,9 +26,9 @@ export const AppFooter: FC = () => {
     const { isAuth } = useAuth()
     const router = useRouter()
 
-    const homeIntro = document.getElementById('intro')
+    const scrollToIntro =  async () => {
+        const homeIntro = await document.getElementById('intro')
 
-    const scrollToIntro = () => {
         homeIntro?.scrollIntoView({
             behavior: 'smooth',
             block: 'center'
@@ -96,7 +96,7 @@ export const AppFooter: FC = () => {
         }
     ]
 
-    return <footer>
+    return <footer className={s.footer}>
         <Box sx={styles.root}>
             <Box sx={styles.content}>
                 <Grid container spacing={2}>

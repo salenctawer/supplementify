@@ -4,7 +4,7 @@ import React, { FC, useEffect, useMemo, useState } from "react"
 
 import { Box, AppBar, Toolbar, Typography, Button, Avatar, useTheme } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchUserInfo } from "@/redux/slices/userSlice";
+import { fetchUserInfo, fetchAuthUrl } from "@/redux/slices/userSlice";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from 'next/navigation'
 
@@ -54,6 +54,16 @@ export const AppHeader: FC = () => {
         toggleColorMode()
     }
 
+    const onLoginClick = async () => {
+        const data = await dispatch(fetchAuthUrl())
+
+        if (!data.payload) {
+            return alert('Ошибка авторизации') // редирект на страницу с ошибкой
+        }
+
+        return router.push(data.payload)
+    }
+
     return (
     <Box className={`container ${scrollTop > 64 ? styles.headerFixed : styles.header}`} >
             <AppBar position="static" sx={{ borderRadius: theme.shape }}>
@@ -76,7 +86,7 @@ export const AppHeader: FC = () => {
                                     <Button color="inherit" onClick={onLogoutClick}>Logout</Button>
                                 </Box>
                             </Box>
-                            : <Button color="inherit">Login</Button>
+                            : <Button color="inherit" onClick={onLoginClick}>Login</Button>
                     }
                 </Toolbar>
             </AppBar>
