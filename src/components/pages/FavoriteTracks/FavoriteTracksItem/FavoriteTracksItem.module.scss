@@ -1,0 +1,11 @@
+.card {
+    transition: all 1s ease-in-out;
+
+    &.isVisible {
+        opacity: 1;
+    }
+
+    &.isHidden {
+        opacity: 0;
+    }
+}

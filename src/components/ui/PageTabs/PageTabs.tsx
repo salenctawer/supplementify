@@ -15,7 +15,7 @@ export const PageTabs: FC<PageTabsData> = (props) => {
         props.handleTabChange(newValue)
     }
 
-    return <Tabs value={tabValue} onChange={handleChange}>
+    return <Tabs value={tabValue} onChange={handleChange} centered sx={{marginBottom: '16px'}}>
         <Tab value="short_term" label="Last month" />
         <Tab value="medium_term" label="Last 6 months" />
         <Tab value="long_term" label="All time" />
