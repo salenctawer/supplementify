@@ -1,11 +1,9 @@
 'use client'
 
-import { useEffect } from "react"
 import { useRouter } from 'next/navigation'
-import { useAuth } from "@/hooks/useAuth"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 
-import { Box, Button, Grid, ImageList, ImageListItem, Typography } from "@mui/material"
+import { Box, Button, Grid, Typography } from "@mui/material"
 import { fetchAuthUrl, fetchLogin } from "@/redux/slices/userSlice"
 import Image from "next/image"
 
@@ -15,15 +13,7 @@ export const HomeIntro = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
 
-    const { accessToken, loginData, setStoreLoginData } = useAuth()
-
     const userInfo = useAppSelector(state => state.user.userInfo)
-
-    useEffect(() => {
-        if (accessToken && !loginData) {
-            setStoreLoginData()
-        }
-    }, [accessToken, loginData])
 
     const onLoginClick = async () => {
         const data = await dispatch(fetchAuthUrl())

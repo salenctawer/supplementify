@@ -32,12 +32,14 @@ export const FavoriteTracks: FC = () => {
     })
 
     useEffect(() => {
-        dispatch(fetchFavoriteTracks({
-            loginData, 
-            params
-        }))
+        if(loginData) {
+            dispatch(fetchFavoriteTracks({
+                loginData, 
+                params
+            }))
+        }
 
-    }, [params])
+    }, [params, loginData])
 
     const handleTabChange = (timeRange: string) => {
         setParams({
@@ -51,13 +53,9 @@ export const FavoriteTracks: FC = () => {
             <PageTabs handleTabChange={handleTabChange}/>
             {
                 fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
-                <ItemsTable rows={rows}>
-                    {
-                        favoriteTracksData.map((track, index) => (
-                            <FavoriteTrackItem trackItem={track} index={index} key={index}/>
-                        ))
-                    }
-                </ItemsTable>
+                favoriteTracksData.map((track, index) => (
+                    <FavoriteTrackItem trackItem={track} index={index} key={index}/>
+                ))
             }
         </PageProvider>
     )

@@ -65,7 +65,6 @@ instance.interceptors.request.use((config: any) => { //TODO: типизиров�
         config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
         config.headers['Content-Type'] = 'multipart/form-data; charset=utf-8'
 
-        console.log(config.headers['Content-Type'])
         return config;
     }
 

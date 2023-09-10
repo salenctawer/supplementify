@@ -20,7 +20,7 @@ export const AppHeader: FC = () => {
     const { toggleColorMode } = React.useContext(ColorModeContext)
     const dispatch = useAppDispatch()
     const userInfo = useAppSelector(state => state.user.userInfo)
-    const { isAuth, loginData } = useAuth()
+    const { isAuth, loginData, accessToken, setStoreLoginData } = useAuth()
     const router = useRouter()
     const [scrollTop, setScrollTop] = useState(0);
 
@@ -29,6 +29,12 @@ export const AppHeader: FC = () => {
             dispatch(fetchUserInfo(loginData))
         }
     }, [isAuth])
+
+    useEffect(() => {
+        if (accessToken && !loginData) {
+            setStoreLoginData()
+        }
+    }, [accessToken, loginData])
 
     const isDarkMode = useMemo(() => {
         return theme.palette.mode === ModeTypes.DARK
