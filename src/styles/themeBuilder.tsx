@@ -36,7 +36,7 @@ const getDesignTokens = (mode: PaletteMode, isMobileDevice: boolean) => ({
         fontFamily: manrope.style.fontFamily,
     },
     breakpoints: {
-        values: { //TODO custom breakpoints
+        values: {
             xl: 1850,
             lg: 1200,
             md: 900,
