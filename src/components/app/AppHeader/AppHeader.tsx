@@ -72,13 +72,19 @@ export const AppHeader: FC = () => {
         return router.push(data.payload)
     }
 
+
+
     return (
     <Box className={`${scrollTop > 64 ? styles.headerFixed : styles.header}`} >
             <AppBar position="static" sx={{ borderRadius: theme.shape }}>
                 <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Supplementify
-                    </Typography>
+                    {
+                        mdSize ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                                    Supplementify
+                                </Typography>
+                                :
+                        <div>fsdfsdfsd</div>
+                    }
                     <DarkModeSwitch
                         style={{ margin: 'auto 16px auto 0' }}
                         checked={isDarkMode}
@@ -100,6 +106,10 @@ export const AppHeader: FC = () => {
             </AppBar>
         </Box>
     )
+}
+
+const SidebarDrawer = () => {
+    
 }
 
 export default AppHeader
