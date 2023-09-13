@@ -13,6 +13,7 @@ import { ColorModeContext } from "@/styles/themeBuilder"
 import { ModeTypes } from "@/types/EnumsData";
 
 import styles from './AppHeader.module.scss'
+import useMedia from "@/styles/useMedia";
 
 
 export const AppHeader: FC = () => {
@@ -23,6 +24,7 @@ export const AppHeader: FC = () => {
     const { isAuth, loginData, accessToken, setStoreLoginData } = useAuth()
     const router = useRouter()
     const [scrollTop, setScrollTop] = useState(0);
+    const { mdSize } = useMedia()
 
     useEffect(() => {
         if (isAuth) {
@@ -71,7 +73,7 @@ export const AppHeader: FC = () => {
     }
 
     return (
-    <Box className={`container ${scrollTop > 64 ? styles.headerFixed : styles.header}`} >
+    <Box className={`${scrollTop > 64 ? styles.headerFixed : styles.header}`} >
             <AppBar position="static" sx={{ borderRadius: theme.shape }}>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

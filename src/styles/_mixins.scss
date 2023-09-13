@@ -1,0 +1,18 @@
+@mixin media($width, $type: max) {
+    @media (#{$type}-width: #{$width}) {
+        @content;
+    }
+}
+
+@mixin media-up($width) {
+    @include media($width + 1px, min) {
+        @content;
+    }
+}
+
+@mixin media-down($width) {
+    @include media($width , max) {
+        @content;
+    }
+}
+

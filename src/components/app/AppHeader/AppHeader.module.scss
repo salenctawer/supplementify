@@ -1,3 +1,6 @@
+@import 'src/styles/mixins';
+@import 'src/styles/variables';
+
 .headerFixed {
     opacity: 0.7;
     position: fixed;
@@ -8,8 +11,19 @@
     z-index: 1;
     width: 100%;
     max-width: 1130px;
+
+    @include media-down($media-md) {
+        max-width: 100%;
+    }
 }
 
 .header {
     width: 100%;
+    max-width: 1400px;
+    padding: 0 94px;
+    margin: 0 auto;
+
+    @include media-down($media-md) {
+        padding: 0 16px;
+    }
 }

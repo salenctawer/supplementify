@@ -1,3 +1,6 @@
+@import 'src/styles/mixins';
+@import 'src/styles/variables';
+
 .sidebarDesktop{
     position: fixed;
     overflow: hidden;
@@ -28,6 +31,10 @@
     padding: 16px;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
+
+    @include media-down($media-md) {
+        display: none;
+    }
 
     &:hover {
         width: 240px;
