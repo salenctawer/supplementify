@@ -89,7 +89,7 @@ export const AppHeader: FC = () => {
                                     Supplementify
                                 </Typography>
                                 :
-                            <SidebarDrawer toggleDrawer={toggleDrawer} isOpen={isOpenDrawer}/>
+                            <SidebarDrawer isOpen={isOpenDrawer} onOpen={() => toggleDrawer(true)} onClose={() => toggleDrawer(false)}/>
                     }
                     <Box sx={{display: 'flex'}}>
                         <DarkModeSwitch
@@ -117,29 +117,30 @@ export const AppHeader: FC = () => {
 }
 
 interface SidebarDrawerProps {
-    toggleDrawer: (state: boolean) => void
     isOpen: boolean
+    onOpen: () => void
+    onClose: () => void
 }
 
 const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
     const sidebarTabs = useAppSelector(state => state.sidebar.sidebarAuthTabs)
-    const {toggleDrawer, isOpen} = props
+    const {onOpen, onClose, isOpen} = props
 
     return (
         <div>   
-            <Button onClick={() => toggleDrawer(true)}>
+            <Button onClick={onOpen}>
                 <IconComponent iconName="MenuOutlined"/>
             </Button>
             <SwipeableDrawer
                 anchor="left"
                 open={isOpen}
-                onClose={() => toggleDrawer(false)}
-                onOpen={() => toggleDrawer(true)}
+                onClose={onClose}
+                onOpen={onOpen}
             >
                 <Box
                     role="presentation"
-                    onClick={() => toggleDrawer(false)}
-                    onKeyDown={() => toggleDrawer(false)}
+                    onClick={onClose}
+                    onKeyDown={onClose}
                 >
                     <List>
                         {
