@@ -15,6 +15,7 @@ import { ModeTypes } from "@/types/EnumsData";
 import styles from './AppHeader.module.scss'
 import useMedia from "@/styles/useMedia";
 import { IconComponent } from "@/components/ui/IconComponent/IconComponent";
+import { SidebarTabItemData } from "@/types/SidebarData";
 
 
 export const AppHeader: FC = () => {
@@ -78,18 +79,26 @@ export const AppHeader: FC = () => {
         setIsOpenDrawer(state)
     }
 
-
+    
+    const onItemClick = (item: SidebarTabItemData) => {
+        router.push(item.routeName)
+    }
 
     return (
     <Box className={`${scrollTop > 64 ? styles.headerFixed : styles.header}`} >
             <AppBar position="static" sx={{ borderRadius: theme.shape }}>
                 <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                     {
-                        mdSize ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        mdSize ? <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: '#fff' }}>
                                     Supplementify
                                 </Typography>
                                 :
-                            <SidebarDrawer isOpen={isOpenDrawer} onOpen={() => toggleDrawer(true)} onClose={() => toggleDrawer(false)}/>
+                            <SidebarDrawer 
+                                isOpen={isOpenDrawer} 
+                                onOpen={() => toggleDrawer(true)} 
+                                onClose={() => toggleDrawer(false)}
+                                onItemClick={onItemClick}
+                            />
                     }
                     <Box sx={{display: 'flex'}}>
                         <DarkModeSwitch
@@ -103,11 +112,14 @@ export const AppHeader: FC = () => {
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                     <Avatar src={userInfo.images[0].url} />
                                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        {userInfo.display_name}
-                                        <Button color="inherit" onClick={onLogoutClick}>Logout</Button>
+                                        <Typography sx={{color: '#fff'}}>{userInfo.display_name}</Typography>
+                                        <Button color="secondary" onClick={onLogoutClick}>Logout</Button>
                                     </Box>
                                 </Box>
-                                : <Button color="inherit" onClick={onLoginClick}>Login</Button>
+                                : 
+                                <Box>
+                                    <Button onClick={onLoginClick}>Login</Button>
+                                </Box>
                         }
                     </Box>
                 </Toolbar>
@@ -120,11 +132,16 @@ interface SidebarDrawerProps {
     isOpen: boolean
     onOpen: () => void
     onClose: () => void
+    onItemClick: (item: SidebarTabItemData) => void
 }
 
 const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
     const sidebarTabs = useAppSelector(state => state.sidebar.sidebarAuthTabs)
-    const {onOpen, onClose, isOpen} = props
+    const {onOpen, onClose, isOpen, onItemClick} = props
+
+    // const iconStyles = {
+    //     color: theme
+    // }
 
     return (
         <div>   
@@ -136,6 +153,11 @@ const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
                 open={isOpen}
                 onClose={onClose}
                 onOpen={onOpen}
+                PaperProps={{
+                    sx: {
+                        backgroundColor: 'background.default'
+                    }
+                }}
             >
                 <Box
                     role="presentation"
@@ -145,9 +167,16 @@ const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
                     <List>
                         {
                             sidebarTabs.map((item) => (
-                                <ListItem key={item.name}>
-                                    {item.name}
-                                </ListItem>
+                                <Box sx={{padding: '8px 16px'}}>
+                                    <Button onClick={() => onItemClick(item)} className={styles.item} key={item.name}>
+                                        <IconComponent 
+                                            iconName={item.icon} 
+                                            styles={
+                                            }
+                                        />
+                                        <Typography sx={{marginLeft: '16px', color: 'primary.contrastText'}}>{item.name}</Typography>
+                                    </Button>
+                                </Box>
                             ))
                         }
                     </List>

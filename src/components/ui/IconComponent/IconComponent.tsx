@@ -1,14 +1,35 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import * as MuiIcons from '@mui/icons-material'
 
-import styles from './IconComponents.module.scss'
+import s from './IconComponents.module.scss'
 
 export type IconNames = keyof typeof MuiIcons
 export type IconProps = {
     iconName: IconNames
+    styles?: {
+        color?: string
+        width?: number
+        height?: number
+    }
 }
 
-export const IconComponent: FC<IconProps> = ({iconName}) => {
+export const IconComponent: FC<IconProps> = ({iconName, styles}) => {
+    const getComponentStyles = () => {
+        if(!styles) {
+            return {
+                width: '28px',
+                height: '28px',
+                color: '#fff'
+            }
+        }
+
+        return {
+            width: styles.width ?? '28px',
+            height: styles.height ?? '28px',
+            color: styles.color ?? '#fff'
+        }
+    }
+
     const Icon = MuiIcons[iconName]
-    return <Icon className={styles.icon} />
+    return <Icon sx={getComponentStyles()} />
 }

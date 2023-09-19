@@ -19,15 +19,21 @@ const getDesignTokens = (mode: PaletteMode, isMobileDevice: boolean) => ({
                   background: { default: '#eceff1', paper: '#fafafa' },
                   primary: {
                     main: 'rgb(30, 215, 96)', //TODO подумать над цветами
-                    contrastText: '#fff',
-                },
+                    contrastText: '#000',
+                  },
+                  secondary: {
+                    main: '#fff'
+                  }
               }
             : {
                   background: { default: '#272731', paper: '#32323e' },
                   primary: {
                     main: 'rgb(37, 179, 89)',
                     contrastText: '#fff',
-                },
+                  },
+                  secondary: {
+                    main: '#fff'
+                  }
               }),
         
     },
