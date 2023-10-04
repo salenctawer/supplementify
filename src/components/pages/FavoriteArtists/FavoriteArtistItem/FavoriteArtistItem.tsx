@@ -5,6 +5,8 @@ import { FC } from 'react'
 import { SpotifyFavoriteArtistItemData } from '@/types/SpotifyData';
 import { CardContent, CardMedia, Card, Typography } from '@mui/material';
 
+import styles from './FavoriteArtistItem.module.scss'
+
 interface FavoriteArtistItemProps {
     index: number
     artist: SpotifyFavoriteArtistItemData
@@ -13,8 +15,9 @@ interface FavoriteArtistItemProps {
 export const FavoriteArtistItem:FC<FavoriteArtistItemProps> = (props) => {
     const { artist } = props
 
-    return (<Card>
-        <CardMedia 
+    return (<Card sx={{ height: '100%' }} className={styles.card}>
+        <CardMedia
+            className={styles.image} 
             image={artist.images[0].url}
             title={artist.name}
             sx={{height: artist.images[0].height / 2, width: '100%', objectFit: 'cover' }}
