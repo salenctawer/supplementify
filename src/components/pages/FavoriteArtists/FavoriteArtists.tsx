@@ -11,7 +11,7 @@ export const FavoriteArtists: FC = () => {
     const dispatch = useAppDispatch()
     const [params, setParams]= useState({
         limit: 50,
-        timeRange: 'short-term'
+        timeRange: 'short_term'
     })
 
     useEffect(() => {

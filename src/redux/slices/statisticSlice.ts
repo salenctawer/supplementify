@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { spotifyApi } from '@/api/api'
-import { SpotifyTracksItemData, SpotifyPlaylistsData, SpotifyRecentlyPlayedData } from "@/types/SpotifyData";
+import { SpotifyTracksItemData, SpotifyPlaylistsData, SpotifyRecentlyPlayedData, SpotifyFavoriteArtistItemData } from "@/types/SpotifyData";
 import { FetchTypes } from "@/types/EnumsData";
 import { LoginData } from "@/types/UserData";
 
@@ -42,7 +42,7 @@ export const fetchFavoriteArtists = createAsyncThunk('/user/favoriteArtists', as
 const initialState = {
     playlistsData: null as null | SpotifyPlaylistsData,
     favoriteTracksData: [] as SpotifyTracksItemData[],
-    favoriteArtistsData: [],
+    favoriteArtistsData: [] as SpotifyFavoriteArtistItemData[],
     recentlyPlayedData: null as null | SpotifyRecentlyPlayedData,
     status: 'loading' as FetchTypes,
     error: null as null | Error
@@ -73,12 +73,12 @@ const statisticSlice = createSlice({
 
         //artists
         builder.addCase(fetchFavoriteArtists.pending, (state) => {
-            state.favoriteArtistsData = null
+            state.favoriteArtistsData = []
             state.status = FetchTypes.LOADING
             state.error = null
         })
         builder.addCase(fetchFavoriteArtists.rejected, (state, action) => {
-            state.favoriteArtistsData = null
+            state.favoriteArtistsData = []
             state.status = FetchTypes.REJECTED
             if (action.error) {
                 state.error = action.error
@@ -92,12 +92,12 @@ const statisticSlice = createSlice({
 
         /// tracks
         builder.addCase(fetchFavoriteTracks.pending, (state) => {
-            state.favoriteTracksData = null
+            state.favoriteTracksData = []
             state.status = FetchTypes.LOADING
             state.error = null
         })
         builder.addCase(fetchFavoriteTracks.rejected, (state, action) => {
-            state.favoriteTracksData = null
+            state.favoriteTracksData = []
             state.status = FetchTypes.REJECTED
             if (action.error) {
                 state.error = action.error
@@ -108,7 +108,7 @@ const statisticSlice = createSlice({
             state.status = FetchTypes.FULFILED
             state.error = null
         })
-        
+
         // recently
         builder.addCase(fetchRecentlyPlayed.pending, (state) => {
             state.recentlyPlayedData = null

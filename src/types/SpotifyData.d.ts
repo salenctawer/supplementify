@@ -150,3 +150,15 @@ export interface SpotifyUserData {
     type: string
     uri: string
 }
+
+export interface SpotifyFavoriteArtistItemData {
+    external_urls: SpotifyExternalUrlsData
+    followers: SpotifyFollowersData
+    genres: string[]
+    href: string
+    id: string
+    images: SpotifyItemImagesData[]
+    name: string
+    popularity: number
+    uri: string
+}
