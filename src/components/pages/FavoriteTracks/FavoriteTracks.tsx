@@ -14,7 +14,7 @@ import { PageProvider } from "@/components/PageProvider/PageProvider"
 
 export const FavoriteTracks: FC = () => {
     const dispatch = useAppDispatch()
-    const {loginData} = useAuth()
+    const { loginData } = useAuth()
     const favoriteTracksData = useAppSelector(state => state.statistic.favoriteTracksData)
     const error = useAppSelector(state => state.statistic.error)
     const fetchStatus = useAppSelector(state => state.statistic.status)

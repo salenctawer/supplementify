@@ -165,7 +165,7 @@ const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
                     onKeyDown={onClose}
                 >
                     <List>
-                        {
+                        {/* {
                             sidebarTabs.map((item) => (
                                 <Box sx={{padding: '8px 16px'}}>
                                     <Button onClick={() => onItemClick(item)} className={styles.item} key={item.name}>
@@ -178,7 +178,7 @@ const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
                                     </Button>
                                 </Box>
                             ))
-                        }
+                        } */}
                     </List>
                 </Box>
             </SwipeableDrawer>

@@ -6,7 +6,7 @@ const instance = axios.create({
     baseURL: 'http://localhost:8080/api',
 })
 
-const PLAYLISTS_ENDPOINT = 'v1/me/usertopartists'
+const FAVORITE_ARTISTS_ENDPOINT= '/usertopartists'
 const FAVORITE_TRACKS_ENDPOINT = '/usertoptracks'
 const RECENTLY_PLAYED_ENDPOINT = '/recentlyplayedtracks'
 const USER_INFO_ENDPOINT = '/userinfo'
@@ -14,8 +14,19 @@ const AUTH_URL_ENDPOINT = '/authurl'
 const USER_LOGIN_ENDPOINT = '/login'
 
 export const spotifyApi = {
-    fetchPlaylists() {
-        return instance.get(PLAYLISTS_ENDPOINT)
+    fetchFavoriteArtists(loginData: LoginData | null, params: any) {
+        const data = {
+            token_type: loginData?.token_type,
+            refresh_token: loginData?.refresh_token,
+            expiry: loginData?.expiry
+        }
+        
+        return instance.post(FAVORITE_ARTISTS_ENDPOINT, data, {
+            params: {
+                limit: params.limit,
+                time_range: params.timeRange,
+            }
+        })
     },
     fetchFavoriteTracks(loginData: LoginData | null, params: FetchFavoriteTracksParamsData) {
         const data = {

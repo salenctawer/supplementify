@@ -9,10 +9,10 @@ export interface FetchFavoriteTracksParamsData {
     timeRange: string
 }
 
-export const fetchPlaylists = createAsyncThunk('/user/playlists', async () => {
-    const { data } = await spotifyApi.fetchPlaylists()
-    return data
-})
+// export const fetchPlaylists = createAsyncThunk('/user/playlists', async () => {
+//     const { data } = await spotifyApi.fetchPlaylists()
+//     return data
+// })
 
 export interface FetchFavoriteTracksData {
     loginData: LoginData | null
@@ -29,9 +29,20 @@ export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async (lim
     return data
 })
 
+export interface FetchFavoriteArtistsData{
+    params: any
+    loginData: LoginData | null
+}
+
+export const fetchFavoriteArtists = createAsyncThunk('/user/favoriteArtists', async(payloadData: FetchFavoriteArtistsData) => {
+    const { data } = await spotifyApi.fetchFavoriteArtists(payloadData.loginData, payloadData.params)
+    return data
+})
+
 const initialState = {
     playlistsData: null as null | SpotifyPlaylistsData,
     favoriteTracksData: [] as SpotifyTracksItemData[],
+    favoriteArtistsData: [],
     recentlyPlayedData: null as null | SpotifyRecentlyPlayedData,
     status: 'loading' as FetchTypes,
     error: null as null | Error
@@ -47,18 +58,38 @@ const statisticSlice = createSlice({
     },
     extraReducers: (builder) => {
         // playlists
-        builder.addCase(fetchPlaylists.pending, (state) => {
-            state.playlistsData = null
+        // builder.addCase(fetchPlaylists.pending, (state) => {
+        //     state.playlistsData = null
+        //     state.status = FetchTypes.LOADING
+        // })
+        // builder.addCase(fetchPlaylists.rejected, (state) => {
+        //     state.playlistsData = null
+        //     state.status = FetchTypes.REJECTED
+        // })
+        // builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
+        //     state.playlistsData = action.payload
+        //     state.status = FetchTypes.FULFILED
+        // })
+
+        //artists
+        builder.addCase(fetchFavoriteArtists.pending, (state) => {
+            state.favoriteArtistsData = null
             state.status = FetchTypes.LOADING
+            state.error = null
         })
-        builder.addCase(fetchPlaylists.rejected, (state) => {
-            state.playlistsData = null
+        builder.addCase(fetchFavoriteArtists.rejected, (state, action) => {
+            state.favoriteArtistsData = null
             state.status = FetchTypes.REJECTED
+            if (action.error) {
+                state.error = action.error
+            }
         })
-        builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
-            state.playlistsData = action.payload
+        builder.addCase(fetchFavoriteArtists.fulfilled, (state, action) => {
+            state.favoriteArtistsData = action.payload
             state.status = FetchTypes.FULFILED
+            state.error = null
         })
+
         /// tracks
         builder.addCase(fetchFavoriteTracks.pending, (state) => {
             state.favoriteTracksData = null
@@ -77,6 +108,7 @@ const statisticSlice = createSlice({
             state.status = FetchTypes.FULFILED
             state.error = null
         })
+        
         // recently
         builder.addCase(fetchRecentlyPlayed.pending, (state) => {
             state.recentlyPlayedData = null

@@ -1,11 +1,13 @@
 'use client'
 
+import { useAuth } from "@/hooks/useAuth"
 import { useAppDispatch } from "@/redux/hooks"
-import { fetchFavoriteTracks } from "@/redux/slices/statisticSlice"
+import { fetchFavoriteArtists } from "@/redux/slices/statisticSlice"
 import { FC, useEffect, useState } from "react"
 
 
 export const FavoriteArtists: FC = () => {
+    const {loginData} = useAuth()
     const dispatch = useAppDispatch()
     const [params, setParams]= useState({
         limit: 50,
@@ -13,8 +15,13 @@ export const FavoriteArtists: FC = () => {
     })
 
     useEffect(() => {
-        dispatch(fetchFavoriteTracks(params))
-    }, [])
+        if(loginData) {
+            dispatch(fetchFavoriteArtists({
+                loginData, 
+                params
+            }))
+        }
+    }, [params, loginData])
 
     return <div>favorite artists</div>
 }
