@@ -1,4 +1,4 @@
-import { FetchFavoriteTracksParamsData } from '@/redux/slices/statisticSlice'
+import { FetchFavoriteTracksParamsData, FetchRecentsData } from '@/redux/slices/statisticSlice'
 import { LoginData } from '@/types/UserData'
 import axios from 'axios'
 
@@ -42,10 +42,16 @@ export const spotifyApi = {
             }
         })
     },
-    fetchRecentlyPlayed(limit: number) {
-        return instance.get(RECENTLY_PLAYED_ENDPOINT, {
+    fetchRecentlyPlayed(loginData: LoginData | null, payload: { limit: number }) {
+        const data = {
+            token_type: loginData?.token_type,
+            refresh_token: loginData?.refresh_token,
+            expiry: loginData?.expiry
+        }
+
+        return instance.post(RECENTLY_PLAYED_ENDPOINT, data, {
             params: {
-                limit
+                limit: payload.limit
             }
         })
     },

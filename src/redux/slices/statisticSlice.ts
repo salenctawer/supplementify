@@ -24,8 +24,15 @@ export const fetchFavoriteTracks = createAsyncThunk('/user/favoriteTracks', asyn
     return data
 })
 
-export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async (limit: number) => {
-    const { data } = await spotifyApi.fetchRecentlyPlayed(limit)
+export interface FetchRecentsData {
+    loginData: LoginData | null
+    params: {
+        limit: number
+    }
+}
+
+export const fetchRecentlyPlayed = createAsyncThunk('/user/recently', async (payloadData: FetchRecentsData) => {
+    const { data } = await spotifyApi.fetchRecentlyPlayed(payloadData.loginData, payloadData.params)
     return data
 })
 

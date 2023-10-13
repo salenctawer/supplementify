@@ -11,8 +11,10 @@ import { RecentsItem } from "@/components/pages/Recents/RecentsItem/RecentsItem"
 import { FetchTypes } from "@/types/EnumsData"
 import { Button } from "@mui/material"
 import styles from './RecentsPage.module.scss'
+import { useAuth } from "@/hooks/useAuth"
 
 export const RecentsPage = () => {
+    const { loginData } = useAuth()
     const dispatch = useAppDispatch()
     const error = useAppSelector(state => state.statistic.error)
     const fetchStatus = useAppSelector(state => state.statistic.status)
@@ -26,16 +28,26 @@ export const RecentsPage = () => {
         'Last time listening'
     ]
 
-    const [limit, setLimit] = useState(20)
+    const [params, setParams]= useState({
+        limit: 20,
+    })
 
     const handleLimitChange = () => {
-        setLimit(50)
-        dispatch(fetchRecentlyPlayed(limit))
+        setParams({
+            limit: 50
+        })
+        dispatch(fetchRecentlyPlayed({
+            loginData,
+            params
+        }))
     }
 
     useEffect(() => {
-        dispatch(fetchRecentlyPlayed(limit))
-    }, [limit])
+        dispatch(fetchRecentlyPlayed({
+            loginData,
+            params
+        }))
+    }, [params, loginData])
 
     return <PageProvider error={error}>
        {
@@ -49,7 +61,7 @@ export const RecentsPage = () => {
         </ItemsTable>
        }
        {
-        limit === 20 ? <Button onClick={handleLimitChange} variant="contained" className={styles.button}>Load more</Button> : <div></div>
+        params.limit === 20 ? <Button onClick={handleLimitChange} variant="contained" className={styles.button}>Load more</Button> : <div></div>
        }
     </PageProvider>
 }
