@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { spotifyApi } from '@/api/api'
-import { SpotifyTracksItemData, SpotifyPlaylistsData, SpotifyRecentlyPlayedData, SpotifyFavoriteArtistItemData } from "@/types/SpotifyData";
+import { SpotifyTracksItemData, SpotifyPlaylistsData, SpotifyFavoriteArtistItemData, SpotifyRecentlyPlayedItemData } from "@/types/SpotifyData";
 import { FetchTypes } from "@/types/EnumsData";
 import { LoginData } from "@/types/UserData";
 
@@ -50,7 +50,7 @@ const initialState = {
     playlistsData: null as null | SpotifyPlaylistsData,
     favoriteTracksData: [] as SpotifyTracksItemData[],
     favoriteArtistsData: [] as SpotifyFavoriteArtistItemData[],
-    recentlyPlayedData: null as null | SpotifyRecentlyPlayedData,
+    recentlyPlayedData: null as null | SpotifyRecentlyPlayedItemData[],
     status: 'loading' as FetchTypes,
     error: null as null | Error
 }

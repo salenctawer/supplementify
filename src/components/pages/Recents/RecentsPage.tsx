@@ -43,10 +43,12 @@ export const RecentsPage = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchRecentlyPlayed({
-            loginData,
-            params
-        }))
+        if(loginData) {
+            dispatch(fetchRecentlyPlayed({
+                loginData,
+                params
+            }))
+        }
     }, [params, loginData])
 
     return <PageProvider error={error}>
@@ -54,7 +56,7 @@ export const RecentsPage = () => {
         fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
         <ItemsTable rows={rows}>
             {
-                recenltyPlayedData?.items.map((item, idx) => (
+                recenltyPlayedData?.map((item, idx) => (
                     <RecentsItem item={item} index={idx}/>
                 ))
             }

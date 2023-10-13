@@ -24,7 +24,7 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
                 {props.index + 1}
             </TableCell>
             <TableCell>
-                <Avatar src={props.item.track.album.images[0].url}/>
+                {/* <Avatar src={props.item.track.album.images[0].url}/> */}
             </TableCell>
             <TableCell>
                 {props.item.track.name}

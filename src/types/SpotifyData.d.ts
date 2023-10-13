@@ -120,16 +120,12 @@ export interface SpotifyRecentlyPlayedItemData {
     track: SpotifyTracksItemData
 }
 
-export interface SpotifyRecentlyPlayedData {
-    cursos: {
-        after: string
-        before: string
-    }
-    href: string
-    items: SpotifyRecentlyPlayedItemData[]
-    limit: number
-    next: string
-}
+// export interface SpotifyRecentlyPlayedData {
+//     context: {
+
+//     }
+//     track: SpotifyRecentlyPlayedItemData
+// }
 
 export interface SpotifyUserData {
     country: string
