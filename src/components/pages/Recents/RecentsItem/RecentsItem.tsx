@@ -1,11 +1,13 @@
-import React, { FC } from "react"
+import React, { FC, useState, useEffect } from "react"
 
 import { SpotifyRecentlyPlayedItemData } from "@/types/SpotifyData"
 import useArtits from "@/hooks/useArtists"
 import useTime from "@/hooks/useTime"
 
-import { Avatar, ListItem, TableCell, TableRow, ListItemAvatar, ListItemText, Typography } from "@mui/material"
+import { Avatar, ListItem, TableCell, TableRow, ListItemAvatar, ListItemText, Typography, IconButton } from "@mui/material"
 import useMedia from "@/styles/useMedia"
+import { PauseRounded, PlayArrowRounded } from "@mui/icons-material"
+import useAudio from "@/hooks/useAudio"
 
 interface RecentsItemPropsData {
    item: SpotifyRecentlyPlayedItemData
@@ -13,6 +15,8 @@ interface RecentsItemPropsData {
 }
 
 export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
+    const {playing, toggle} = useAudio(props.item.track.preview_url);
+
     const { getLastListeningTime } = useTime()
     const { mdSize } = useMedia()
 
@@ -24,9 +28,6 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
                 {props.index + 1}
             </TableCell>
             <TableCell>
-                {/* <Avatar src={props.item.track.album.images[0].url}/> */}
-            </TableCell>
-            <TableCell>
                 {props.item.track.name}
             </TableCell>
             <TableCell>
@@ -35,9 +36,16 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
             <TableCell>
                 {time + ' ago'}
             </TableCell>
+            <TableCell>
+                <IconButton aria-label="play" color="primary" onClick={() => toggle(props.item.track.preview_url)}>
+                    {
+                        playing ? <PauseRounded color="primary" /> : <PlayArrowRounded color="primary"/>
+                    }
+                </IconButton>
+            </TableCell>
     </TableRow> : <ListItem>
         <ListItemAvatar>
-            <Avatar src={props.item.track.album.images[0].url}/>
+            Preview
         </ListItemAvatar>
         <ListItemText primary={`${artists} - ${props.item.track.name}`} secondary={`${time} ago`}>
         </ListItemText>

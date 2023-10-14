@@ -22,10 +22,10 @@ export const RecentsPage = () => {
 
     const rows = [
         'Position',
-        'Cover',
         'Title',
         'Artist',
-        'Last time listening'
+        'Last time listening',
+        'Preview'
     ]
 
     const [params, setParams]= useState({
@@ -57,7 +57,7 @@ export const RecentsPage = () => {
         <ItemsTable rows={rows}>
             {
                 recenltyPlayedData?.map((item, idx) => (
-                    <RecentsItem item={item} index={idx}/>
+                    <RecentsItem item={item} index={idx} key={idx}/>
                 ))
             }
         </ItemsTable>
