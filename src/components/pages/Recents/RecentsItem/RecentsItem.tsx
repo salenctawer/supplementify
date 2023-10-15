@@ -15,7 +15,7 @@ interface RecentsItemPropsData {
 }
 
 export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
-    const {playing, toggle} = useAudio(props.item.track.preview_url);
+    const {playing, toggle} = useAudio(props.item.track.preview_url, props.index);
 
     const { getLastListeningTime } = useTime()
     const { mdSize } = useMedia()
@@ -42,6 +42,7 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
                         playing ? <PauseRounded color="primary" /> : <PlayArrowRounded color="primary"/>
                     }
                 </IconButton>
+                <audio src={props.item.track.preview_url}></audio> 
             </TableCell>
     </TableRow> : <ListItem>
         <ListItemAvatar>
