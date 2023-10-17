@@ -12,15 +12,18 @@ import PageTabs from "@/components/ui/PageTabs/PageTabs"
 import FavoriteArtistItem from "@/components/pages/FavoriteArtists/FavoriteArtistItem/FavoriteArtistItem"
 import { Grid } from "@mui/material"
 import FavoriteArtistSkeleton from "@/components/pages/FavoriteArtists/FavoriteArtistSkeleton/FavoriteArtistSkeleton"
+import useMedia from "@/styles/useMedia"
+import styles from './FavoriteArtists.module.scss'
 
 
 export const FavoriteArtists: FC = () => {
-    const {loginData} = useAuth()
+    const { mdSize } = useMedia()
+    const { loginData } = useAuth()
     const dispatch = useAppDispatch()
     const error = useAppSelector(state => state.statistic.error)
     const favoriteArtistsData = useAppSelector(state => state.statistic.favoriteArtistsData)
     const fetchStatus = useAppSelector(state => state.statistic.status)
-    const [params, setParams]= useState({
+    const [params, setParams] = useState({
         limit: 50,
         timeRange: 'short_term'
     })
@@ -33,27 +36,27 @@ export const FavoriteArtists: FC = () => {
     }
 
     useEffect(() => {
-        if(loginData) {
+        if (loginData) {
             dispatch(fetchFavoriteArtists({
-                loginData, 
+                loginData,
                 params
             }))
         }
     }, [params, loginData])
 
     return <PageProvider error={error}>
-        <PageTabs handleTabChange={handleTabChange}/>
+        <PageTabs handleTabChange={handleTabChange} />
         {
             fetchStatus === FetchTypes.LOADING ? <FavoriteArtistSkeleton /> :
-            <Grid container spacing={2}>
-                {
-                    favoriteArtistsData.map((artist, index) => (
-                        <Grid item xs={4}>
-                            <FavoriteArtistItem artist={artist} index={index} key={index}/>
-                        </Grid>
-                    ))
-                }
-            </Grid>
+                <Grid className={styles.container} container spacing={4}>
+                    {
+                        favoriteArtistsData.map((artist, index) => (
+                            <Grid item xs={12} md={6} lg={4}>
+                                <FavoriteArtistItem artist={artist} index={index} key={index} />
+                            </Grid>
+                        ))
+                    }
+                </Grid>
         }
     </PageProvider>
 }
