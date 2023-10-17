@@ -16,12 +16,14 @@ export const FavoriteArtistItem:FC<FavoriteArtistItemProps> = (props) => {
     const { artist } = props
 
     return (<Card sx={{ height: '100%', maxHeight: '100%', display: 'flex', flexDirection: 'column' }} className={styles.card}>
-        <CardMedia
-            className={styles.image} 
-            image={artist.images[0].url}
-            title={artist.name}
-            sx={{height: artist.images[0].height / 2, width: '100%', objectFit: 'cover' }}
-        />
+        <Box className={styles.imageContainer}>
+            <CardMedia
+                className={styles.image} 
+                image={artist.images[0].url}
+                title={artist.name}
+                sx={{height: artist.images[0].height / 2, width: '100%', objectFit: 'cover' }}
+            />
+        </Box>
         <CardContent>
             <Typography sx={{marginBottom: '16px', fontWeight: 'bold', fontSize: '20px'}}>
                 {props.index + 1}. {artist.name}
