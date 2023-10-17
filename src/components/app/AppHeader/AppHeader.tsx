@@ -87,7 +87,7 @@ export const AppHeader: FC = () => {
     return (
     <Box className={`${scrollTop > 64 ? styles.headerFixed : styles.header}`} >
             <AppBar position="static" sx={{ borderRadius: theme.shape }}>
-                <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <Toolbar sx={{display: 'flex', justifyContent: 'space-between', paddingTop: '8px', paddingBottom: '8px'}}>
                     {
                         mdSize ? <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: '#fff' }}>
                                     Supplementify
@@ -110,10 +110,12 @@ export const AppHeader: FC = () => {
                         {
                             userInfo ?
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Avatar src={userInfo.images[0].url} />
+                                    <Avatar src={userInfo.images[0].url} sx={{width: '52px', height: '52px'}}/>
                                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <Typography sx={{color: '#fff'}}>{userInfo.display_name}</Typography>
-                                        <Button color="secondary" onClick={onLogoutClick}>Logout</Button>
+                                        <Typography sx={{color: '#fff', fontSize: '18px'}}>{userInfo.display_name}</Typography>
+                                        <Button color="secondary" onClick={onLogoutClick} sx={{fontSize: '14px'}}>
+                                            Logout
+                                        </Button>
                                     </Box>
                                 </Box>
                                 : 

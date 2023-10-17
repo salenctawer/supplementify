@@ -11,6 +11,7 @@ import { PageProvider } from "@/components/PageProvider/PageProvider"
 import PageTabs from "@/components/ui/PageTabs/PageTabs"
 import FavoriteArtistItem from "@/components/pages/FavoriteArtists/FavoriteArtistItem/FavoriteArtistItem"
 import { Grid } from "@mui/material"
+import FavoriteArtistSkeleton from "@/components/pages/FavoriteArtists/FavoriteArtistSkeleton/FavoriteArtistSkeleton"
 
 
 export const FavoriteArtists: FC = () => {
@@ -42,16 +43,18 @@ export const FavoriteArtists: FC = () => {
 
     return <PageProvider error={error}>
         <PageTabs handleTabChange={handleTabChange}/>
-        <Grid container spacing={2}>
         {
-                fetchStatus === FetchTypes.LOADING ? <div>Загрузка</div> : // TODO: сделать скелетон
-                favoriteArtistsData.map((artist, index) => (
-                    <Grid item xs={4}>
-                        <FavoriteArtistItem artist={artist} index={index} key={index}/>
-                    </Grid>
-                ))
-            }
-        </Grid>
+            fetchStatus === FetchTypes.LOADING ? <FavoriteArtistSkeleton /> :
+            <Grid container spacing={2}>
+                {
+                    favoriteArtistsData.map((artist, index) => (
+                        <Grid item xs={4}>
+                            <FavoriteArtistItem artist={artist} index={index} key={index}/>
+                        </Grid>
+                    ))
+                }
+            </Grid>
+        }
     </PageProvider>
 }
 
