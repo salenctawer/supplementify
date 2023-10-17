@@ -4,8 +4,7 @@
 .headerFixed {
     opacity: 0.7;
     position: fixed;
-    transition: opacity 0.2s ease-in-out;
-    transition: max-width 0.7s ease-in-out;
+    transition: opacity 0.4s cubic-bezier(.82,.99,.44,.51);
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1;
