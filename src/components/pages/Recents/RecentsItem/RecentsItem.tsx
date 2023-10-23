@@ -3,6 +3,7 @@ import React, { FC, useState, useEffect } from "react"
 import { SpotifyRecentlyPlayedItemData } from "@/types/SpotifyData"
 import useArtits from "@/hooks/useArtists"
 import useTime from "@/hooks/useTime"
+import styles from './RecentsItem.module.scss'
 
 import { Avatar, ListItem, TableCell, TableRow, ListItemAvatar, ListItemText, Typography, IconButton } from "@mui/material"
 import useMedia from "@/styles/useMedia"
@@ -23,7 +24,7 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
     const artists = useArtits(props.item.track.artists)
     const time = getLastListeningTime(props.item.played_at)
 
-    return ( mdSize ?<TableRow hover>
+    return ( mdSize ?<TableRow hover className={styles.card}>
         <TableCell>
                 {props.index + 1}
             </TableCell>
@@ -45,11 +46,13 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
                 <audio src={props.item.track.preview_url}></audio> 
             </TableCell>
     </TableRow> : <ListItem>
-        <ListItemAvatar>
-            Preview
-        </ListItemAvatar>
         <ListItemText primary={`${artists} - ${props.item.track.name}`} secondary={`${time} ago`}>
         </ListItemText>
+        <IconButton aria-label="play" color="primary" onClick={() => toggle(props.item.track.preview_url)}>
+            {
+                playing ? <PauseRounded color="primary" /> : <PlayArrowRounded color="primary"/>
+            }
+        </IconButton>
     </ListItem>
     )
 

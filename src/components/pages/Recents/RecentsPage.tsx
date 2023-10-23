@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { fetchRecentlyPlayed } from "@/redux/slices/statisticSlice"
 import { RecentsItem } from "@/components/pages/Recents/RecentsItem/RecentsItem"
 import { FetchTypes } from "@/types/EnumsData"
-import { Button } from "@mui/material"
+import { Box, Button } from "@mui/material"
 import styles from './RecentsPage.module.scss'
 import { useAuth } from "@/hooks/useAuth"
 
@@ -54,13 +54,15 @@ export const RecentsPage = () => {
     return <PageProvider error={error}>
        {
         fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
-        <ItemsTable rows={rows}>
-            {
-                recenltyPlayedData?.map((item, idx) => (
-                    <RecentsItem item={item} index={idx} key={idx}/>
-                ))
-            }
-        </ItemsTable>
+        <Box className="gridContainer">
+             <ItemsTable rows={rows}>
+                {
+                    recenltyPlayedData?.map((item, idx) => (
+                        <RecentsItem item={item} index={idx} key={idx}/>
+                    ))
+                }
+            </ItemsTable>
+        </Box>
        }
        {
         params.limit === 20 ? <Button onClick={handleLimitChange} variant="contained" className={styles.button}>Load more</Button> : <div></div>

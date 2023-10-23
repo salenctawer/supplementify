@@ -13,7 +13,7 @@ export const ItemsTable = ({ children, rows }: { children: React.ReactNode, rows
     return (
         <TableContainer component={Paper}>
             {
-               mdSize ? <Table>
+               mdSize ? <Table sx={{overflow: 'hidden'}}>
                <TableHead>
                    <TableRow>
                        {
