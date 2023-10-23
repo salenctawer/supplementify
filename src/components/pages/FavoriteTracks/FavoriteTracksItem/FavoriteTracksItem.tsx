@@ -21,7 +21,7 @@ export const FavoriteTrackItem: FC<FavoriteTracksItem> = (props) => {
         threshold: 0,
     })
 
-    const { mdSize } = useMedia()
+    const { mdSize, smSize } = useMedia()
 
     const track = props.trackItem
     const trackDuration = useMemo(() => useDuration(props.trackItem.duration_ms), [track])
@@ -51,14 +51,22 @@ export const FavoriteTrackItem: FC<FavoriteTracksItem> = (props) => {
                 </Card> : 
                 <Card sx={{marginBottom: '16px'}} ref={ref} className={`${styles.card} ${(inView ? styles.isVisible : styles.isHidden)}`}>
                     <CardContent sx={{display: 'flex', alignItems: 'center'}}>
-                        <Box sx={{display: 'flex', alignItems: 'center', marginRight: '64px'}}>
-                            <Typography sx={{marginRight: '16px'}}>{props.index + 1}. {artists}-{track.name}</Typography>
+                        <Box 
+                            sx={smSize ? {display: 'flex', alignItems: 'center', marginRight: '64px'} : {
+                                display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center'
+                            }}
+                        >
+                            <Typography sx={smSize ? {marginRight: '16px'} : {marginRight: '8px'}}>{props.index + 1}. {artists}-{track.name}</Typography>
                             <Avatar src={track.album.images[0].url} />
                         </Box>
-                        <Box sx={{display: 'flex', alignItems: 'center', marginLeft: 'auto', marginRight: '0'}}>
-                            <Typography sx={{marginRight: '32px'}}>{trackDuration}</Typography>
-                            <Typography>{track.album.release_date}</Typography>
-                        </Box>
+                        {
+                            smSize ? <Box sx={{display: 'flex', alignItems: 'center', marginLeft: 'auto', marginRight: '0'}}>
+                                        <Typography sx={{marginRight: '32px'}}>{trackDuration}</Typography>
+                                        <Typography>{track.album.release_date}</Typography>
+                                    </Box>
+                                    : <span></span>
+
+                        }
                     </CardContent>
                 </Card>
 

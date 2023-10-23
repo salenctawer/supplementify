@@ -1,3 +1,6 @@
+@import 'src/styles/mixins';
+@import 'src/styles/variables';
+
 .container {
     max-width: 1400px;
     margin-left: auto;
@@ -7,6 +10,16 @@
 
 .sectionContainer {
     padding: 124px 0;
+}
+
+.gridContainer {
+    @include media-down(1320px) {
+        padding: 0 80px;
+    }
+
+    @include media-down($media-md) {
+        padding: 0 24px;
+    }
 }
 
 .pageTitle {

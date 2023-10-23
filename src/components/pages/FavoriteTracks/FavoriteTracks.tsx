@@ -11,6 +11,7 @@ import ItemsTableSkeleton from "@/components/ui/ItemsTable/ItemsTableSkeleton"
 import FavoriteTrackItem from "@/components/pages/FavoriteTracks/FavoriteTracksItem/FavoriteTracksItem"
 import PageTabs from "@/components/ui/PageTabs/PageTabs"
 import { PageProvider } from "@/components/PageProvider/PageProvider"
+import { Box } from "@mui/material"
 
 export const FavoriteTracks: FC = () => {
     const dispatch = useAppDispatch()
@@ -53,9 +54,13 @@ export const FavoriteTracks: FC = () => {
             <PageTabs handleTabChange={handleTabChange}/>
             {
                 fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
-                favoriteTracksData.map((track, index) => (
-                    <FavoriteTrackItem trackItem={track} index={index} key={index}/>
-                ))
+                <Box className="gridContainer">
+                    {
+                         favoriteTracksData.map((track, index) => (
+                            <FavoriteTrackItem trackItem={track} index={index} key={index}/>
+                        ))
+                    }
+                </Box>
             }
         </PageProvider>
     )

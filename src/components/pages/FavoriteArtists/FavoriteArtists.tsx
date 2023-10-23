@@ -13,7 +13,6 @@ import FavoriteArtistItem from "@/components/pages/FavoriteArtists/FavoriteArtis
 import { Grid } from "@mui/material"
 import FavoriteArtistSkeleton from "@/components/pages/FavoriteArtists/FavoriteArtistSkeleton/FavoriteArtistSkeleton"
 import useMedia from "@/styles/useMedia"
-import styles from './FavoriteArtists.module.scss'
 
 
 export const FavoriteArtists: FC = () => {
@@ -48,7 +47,7 @@ export const FavoriteArtists: FC = () => {
         <PageTabs handleTabChange={handleTabChange} />
         {
             fetchStatus === FetchTypes.LOADING ? <FavoriteArtistSkeleton /> :
-                <Grid className={styles.container} container spacing={4}>
+                <Grid className="gridContainer" container spacing={4}>
                     {
                         favoriteArtistsData.map((artist, index) => (
                             <Grid item xs={12} md={6} lg={4}>

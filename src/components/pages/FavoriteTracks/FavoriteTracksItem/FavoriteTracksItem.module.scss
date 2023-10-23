@@ -1,5 +1,11 @@
 .card {
-    transition: all 1s ease-in-out;
+    transition: opacity 1s ease-in-out, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 10px 57px 50px rgba(0,0,0,0.1);
+    }
 
     &.isVisible {
         opacity: 1;
