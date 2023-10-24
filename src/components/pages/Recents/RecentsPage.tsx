@@ -52,9 +52,9 @@ export const RecentsPage = () => {
     }, [params, loginData])
 
     return <PageProvider error={error}>
+        <Box className="gridContainer">
        {
         fetchStatus === FetchTypes.LOADING ? <ItemsTableSkeleton /> :
-        <Box className="gridContainer">
              <ItemsTable rows={rows}>
                 {
                     recenltyPlayedData?.map((item, idx) => (
@@ -62,8 +62,8 @@ export const RecentsPage = () => {
                     ))
                 }
             </ItemsTable>
-        </Box>
        }
+        </Box>
        {
         params.limit === 20 ? <Button onClick={handleLimitChange} variant="contained" className={styles.button}>Load more</Button> : <div></div>
        }

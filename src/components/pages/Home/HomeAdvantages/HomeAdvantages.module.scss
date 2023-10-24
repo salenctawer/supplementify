@@ -1,35 +1,48 @@
+@import 'src/styles/mixins';
+@import 'src/styles/variables';
+
 .section {
     position: relative;
-    margin-bottom: 248px;
+    margin-bottom: 64px;
 
-    &.isVisible {
-      .tracksCard {
-        transform: translateY(100px);
-        transition: all 2s ease-in-out;
-      }
+    @include media-up($media-lg) {
+      margin-bottom: 248px;
 
-      .artistsCard{
-        transform: translateY(50px);
-        transition: all 1s ease-in-out;
-      }
-
-      .recentsCard {
-        transform: translateY(100px);
-        transition: all 3s ease-in-out;
-      }
-
-      .title {
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        border-right: 3px solid black;
-        animation: cursor 0.75s step-end infinite, printed_text 5s steps(29);
+      &.isVisible {
+        .tracksCard {
+          transform: translateY(100px);
+          transition: all 2s ease-in-out;
+        }
+  
+        .artistsCard{
+          transform: translateY(40px);
+          transition: all 1s ease-in-out;
+        }
+  
+        .recentsCard {
+          transform: translateY(40px);
+          transition: all 1s ease-in-out;
+        }
+  
+        .title {
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          border-right: 3px solid black;
+          animation: cursor 0.75s step-end infinite, printed_text 5s steps(29);
+        }
       }
     }
 }
 
 .itemCard {
-  transform: translateY(300px);
+  width: 100%;
+  margin-bottom: 32px;
+
+  @include media-up($media-lg) {
+    width: auto;
+    transform: translateY(300px);
+  }
 }
 
 .cardContainer {

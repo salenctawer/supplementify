@@ -6,6 +6,10 @@
     margin-left: auto;
     margin-right: auto;
     padding: 0 94px;
+
+    @include media-down($media-md) {
+        padding: 0 16px;
+    }
 }
 
 .sectionContainer {

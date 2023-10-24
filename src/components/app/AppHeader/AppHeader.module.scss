@@ -11,8 +11,13 @@
     width: 100%;
     max-width: 1130px;
 
+    @include media-down(1280px) {
+        padding: 0 94px;
+    }
+
     @include media-down($media-md) {
         max-width: 100%;
+        padding: 0;
     }
 }
 

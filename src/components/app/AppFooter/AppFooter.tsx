@@ -10,11 +10,6 @@ const styles = {
     root: {
         bgcolor: 'background.paper',
     },
-    content: {
-        padding: '40px 96px',
-        margin: '0 auto',
-        maxWidth: '1400px'
-    }, 
     itemsContainer: {
         display: 'flex',
         alignItems: 'flex-start',
@@ -93,16 +88,25 @@ export const AppFooter: FC = () => {
                     isLink: true,
                 },
             ]
+        }, {
+            columnHeader: 'Buy me coffee :)',
+            items: [
+                {
+                    itemText: 'BTC',
+                    itemLink: '#',
+                    isLink: true,
+                }
+            ]
         }
     ]
 
     return <footer className={s.footer}>
         <Box sx={styles.root}>
-            <Box sx={styles.content}>
-                <Grid container spacing={2}>
+            <Box className={s.content}>
+                <Grid container spacing={6}>
                     {
-                        footerItems.map((footerItem, footerItemIdx) => (
-                            <Grid item key={footerItemIdx} md={4}>
+                        footerItems.map((footerItem) => (
+                            <Grid item key={footerItem.columnHeader} md={3} xs={6}>
                                 <Typography className={s.columnHeader}>
                                     {footerItem.columnHeader}
                                 </Typography>

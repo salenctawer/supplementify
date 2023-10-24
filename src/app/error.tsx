@@ -1,10 +1,8 @@
 'use client'
-
 import { useRouter } from 'next/navigation'
 
 import { Button } from "@mui/material"
 import PageContainer from '@/components/ui/PageContainer/PageContainer'
-
  
 export default function Error({
   error,

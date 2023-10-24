@@ -12,19 +12,19 @@ export const HomeAdvantages = () => {
 
     const advantagesCards = [
         {
+            title: 'Explore your favorite artists',
+            text: 'Consider frequent artist auditions in the last month, the last 6 months, and the entire year',
+            buttonText: 'View artists',
+            link: '/artists',
+            classModifier: 'is-artists'
+        },
+        {
             title: 'Explore your favorite tracks in detail',
             text: 'You can view your most listened to tracks from the last month, the last 6 months and the whole year. You can also make a playlist of these tracks, which you will immediately have in',
             buttonText: 'View tracks',
             link: '/tracks',
             classModifier: 'is-tracks'
 
-        },
-        {
-            title: 'Explore your favorite artists',
-            text: 'Consider frequent artist auditions in the last month, the last 6 months, and the entire year',
-            buttonText: 'View artists',
-            link: '/artists',
-            classModifier: 'is-artists'
         },
         {
             title: 'Recently played',
@@ -52,7 +52,7 @@ export const HomeAdvantages = () => {
             <Grid container spacing={{ md: 3 }}>
             {
                 advantagesCards.map((item, idx) => (
-                    <Grid item md={4} key={idx} className={`${styles.itemCard} ${getCardStyle(item.classModifier)}`}>
+                    <Grid item lg={4} key={idx} className={`${styles.itemCard} ${getCardStyle(item.classModifier)}`}>
                         <Card className={styles.cardContainer}> 
                             <CardContent>
                                 <Typography className={styles.cardTitle}>
