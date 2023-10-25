@@ -1,5 +1,3 @@
-'use client'
-
 import { FC } from 'react'
 
 import { SpotifyFavoriteArtistItemData } from '@/types/SpotifyData';
@@ -33,7 +31,7 @@ export const FavoriteArtistItem:FC<FavoriteArtistItemProps> = (props) => {
                 <Box sx={{display: 'inline'}}>
                     {
                         artist.genres.map((item, idx) => (
-                            idx === artist.genres.length - 1 ? <span>{item}</span> : <span>{item}, </span>
+                            idx === artist.genres.length - 1 ? <span key={item}>{item}</span> : <span key={item}>{item}, </span>
                         ))
                     }
                 </Box>

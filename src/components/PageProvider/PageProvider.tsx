@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth"
 
 import PageContainer from "@/components/ui/PageContainer/PageContainer"
 
+// TODO: Сделать middleware или hoc для auth only роутинга, подумать над next auth
 
 export const PageProvider = ({ children, error }: { children: React.ReactNode, error: Error | null }) => {
     const router = useRouter()

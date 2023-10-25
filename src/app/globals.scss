@@ -12,6 +12,13 @@
     }
 }
 
+.centeredContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .sectionContainer {
     padding: 124px 0;
 }

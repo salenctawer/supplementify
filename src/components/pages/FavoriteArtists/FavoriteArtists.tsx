@@ -50,8 +50,8 @@ export const FavoriteArtists: FC = () => {
                 <Grid className="gridContainer" container spacing={4}>
                     {
                         favoriteArtistsData.map((artist, index) => (
-                            <Grid item xs={12} md={6} lg={4}>
-                                <FavoriteArtistItem artist={artist} index={index} key={index} />
+                            <Grid item xs={12} md={6} lg={4} key={artist.id}>
+                                <FavoriteArtistItem artist={artist} index={index} />
                             </Grid>
                         ))
                     }

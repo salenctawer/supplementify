@@ -8,8 +8,8 @@ export type IconProps = {
     iconName: IconNames
     styles?: {
         color?: string
-        width?: number
-        height?: number
+        width?: string
+        height?: string
     }
 }
 

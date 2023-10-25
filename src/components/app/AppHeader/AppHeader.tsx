@@ -120,7 +120,7 @@ export const AppHeader: FC = () => {
                                 </Box>
                                 : 
                                 <Box>
-                                    <Button onClick={onLoginClick}>Login</Button>
+                                    <Button color="secondary" onClick={onLoginClick}>Login</Button>
                                 </Box>
                         }
                     </Box>
@@ -174,7 +174,7 @@ const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
                     <List>
                         {
                             sidebarTabs.map((item) => (
-                                <Box sx={{padding: '8px 16px'}}>
+                                <Box sx={{padding: '8px 16px'}} key={item.name}>
                                     <Button onClick={() => onItemClick(item)} className={styles.item} key={item.name}>
                                         <IconComponent 
                                             iconName={item.icon} 
