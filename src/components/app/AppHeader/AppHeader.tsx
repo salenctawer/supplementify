@@ -139,11 +139,16 @@ interface SidebarDrawerProps {
 
 const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
     const sidebarTabs = useAppSelector(state => state.sidebar.sidebarAuthTabs)
+    const theme = useTheme()
     const {onOpen, onClose, isOpen, onItemClick} = props
 
-    // const iconStyles = {
-    //     color: theme
-    // }
+    const drawerBackground = theme.palette.primary.main
+
+    const iconStyles = {
+        color: theme.palette.secondary.main,
+        width: '24px',
+        height: '24px',
+    }
 
     return (
         <div>   
@@ -157,7 +162,7 @@ const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
                 onOpen={onOpen}
                 PaperProps={{
                     sx: {
-                        backgroundColor: 'background.default'
+                        backgroundColor: drawerBackground
                     }
                 }}
             >
@@ -167,20 +172,21 @@ const SidebarDrawer: FC<SidebarDrawerProps> = (props) => {
                     onKeyDown={onClose}
                 >
                     <List>
-                        {/* {
+                        {
                             sidebarTabs.map((item) => (
                                 <Box sx={{padding: '8px 16px'}}>
                                     <Button onClick={() => onItemClick(item)} className={styles.item} key={item.name}>
                                         <IconComponent 
                                             iconName={item.icon} 
                                             styles={
+                                                iconStyles
                                             }
                                         />
-                                        <Typography sx={{marginLeft: '16px', color: 'primary.contrastText'}}>{item.name}</Typography>
+                                        <Typography sx={{marginLeft: '16px', color: 'secondary.main'}}>{item.name}</Typography>
                                     </Button>
                                 </Box>
                             ))
-                        } */}
+                        }
                     </List>
                 </Box>
             </SwipeableDrawer>
