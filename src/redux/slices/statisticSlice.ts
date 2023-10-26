@@ -52,7 +52,7 @@ const initialState = {
     favoriteArtistsData: [] as SpotifyFavoriteArtistItemData[],
     recentlyPlayedData: null as null | SpotifyRecentlyPlayedItemData[],
     status: 'loading' as FetchTypes,
-    error: null as null | Error
+    error: null as null | string
 }
 
 const statisticSlice = createSlice({
@@ -88,7 +88,7 @@ const statisticSlice = createSlice({
             state.favoriteArtistsData = []
             state.status = FetchTypes.REJECTED
             if (action.error) {
-                state.error = action.error
+                state.error = '500 Internal Server Error'
             }
         })
         builder.addCase(fetchFavoriteArtists.fulfilled, (state, action) => {
@@ -107,7 +107,7 @@ const statisticSlice = createSlice({
             state.favoriteTracksData = []
             state.status = FetchTypes.REJECTED
             if (action.error) {
-                state.error = action.error
+                state.error = '500 Internal Server Error'
             }
         })
         builder.addCase(fetchFavoriteTracks.fulfilled, (state, action) => {
@@ -126,7 +126,7 @@ const statisticSlice = createSlice({
             state.recentlyPlayedData = null
             state.status = FetchTypes.REJECTED
             if (action.error) {
-                state.error = action.error
+                state.error = '500 Internal Server Error'
             }
         })
         builder.addCase(fetchRecentlyPlayed.fulfilled, (state, action) => {

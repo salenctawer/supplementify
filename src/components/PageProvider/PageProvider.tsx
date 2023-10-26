@@ -5,23 +5,24 @@ import { useAppSelector } from "@/redux/hooks"
 import { useAuth } from "@/hooks/useAuth"
 
 import PageContainer from "@/components/ui/PageContainer/PageContainer"
+import { useAuthOnly } from "@/hooks/useAuthOnly"
 
 // TODO: Сделать middleware или hoc для auth only роутинга, подумать над next auth
 
 export const PageProvider = ({ children, error }: { children: React.ReactNode, error: Error | null }) => {
-    const router = useRouter()
-
-    const userInfo = useAppSelector(state => state.user.userInfo)
+    const { isAuth } = useAuthOnly()
 
     useEffect(() => {
-        // console.log(userInfo)
-        // if(!userInfo) {
-        //     router.push('/')
-        // }
+        console.log(error)
+        if(error) {
+            throw new Error(error)
+        }
 
     }, [error])
 
-    return <PageContainer>
+    if(isAuth) {
+        return <PageContainer>
         {children}
     </PageContainer>
+    }
 }
