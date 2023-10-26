@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { useAppDispatch } from "@/redux/hooks"
 import { fetchLogin } from "@/redux/slices/userSlice"
 
+// TODO: Проверить авторизацию + отрефакторить при наодобности код
 
 export const Login: FC = () => {
     const { isAuth } = useAuth()
@@ -41,7 +42,9 @@ export const Login: FC = () => {
         }
     }, [])
 
-    return <div>Login</div>
+    return <main className="container centeredContainer">
+        <h1>Wait a moment, authorization is in progress</h1>
+    </main>
 }
 
 export default Login
