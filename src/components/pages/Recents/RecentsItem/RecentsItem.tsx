@@ -5,7 +5,7 @@ import useArtits from "@/hooks/useArtists"
 import useTime from "@/hooks/useTime"
 import styles from './RecentsItem.module.scss'
 
-import { Avatar, ListItem, TableCell, TableRow, ListItemAvatar, ListItemText, Typography, IconButton } from "@mui/material"
+import { Avatar, ListItem, TableCell, TableRow, ListItemAvatar, ListItemText, Typography, IconButton, Box } from "@mui/material"
 import useMedia from "@/styles/useMedia"
 import { PauseRounded, PlayArrowRounded } from "@mui/icons-material"
 import useAudio from "@/hooks/useAudio"
@@ -25,8 +25,13 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
     const time = getLastListeningTime(props.item.played_at)
 
     return ( mdSize ?<TableRow hover className={styles.card}>
-        <TableCell>
+            <TableCell>
                 {props.index + 1}
+            </TableCell>
+            <TableCell>
+                <Avatar 
+                    src={props.item.track.album.images[0].url}
+                />
             </TableCell>
             <TableCell>
                 {props.item.track.name}
@@ -45,9 +50,14 @@ export const RecentsDefaultItem: FC<RecentsItemPropsData> = (props) => {
                 </IconButton>
                 <audio src={props.item.track.preview_url}></audio> 
             </TableCell>
-    </TableRow> : <ListItem>
-        <ListItemText primary={`${artists} - ${props.item.track.name}`} secondary={`${time} ago`}>
-        </ListItemText>
+    </TableRow> : <ListItem sx={{justifyContent: 'space-between'}}>
+        <Box sx={{display: 'flex', alignItems: 'center'}}>
+            <ListItemText primary={`${artists} - ${props.item.track.name}`} secondary={`${time} ago`} />
+            <Avatar 
+                src={props.item.track.album.images[0].url}
+                sx={{marginLeft:'16px', marginRight: '64px'}}
+            />
+        </Box>
         <IconButton aria-label="play" color="primary" onClick={() => toggle(props.item.track.preview_url)}>
             {
                 playing ? <PauseRounded color="primary" /> : <PlayArrowRounded color="primary"/>

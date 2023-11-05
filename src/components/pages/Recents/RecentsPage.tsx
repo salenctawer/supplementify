@@ -22,10 +22,11 @@ export const RecentsPage = () => {
 
     const rows = [
         'Position',
+        'Cover',
         'Title',
         'Artist',
         'Last time listening',
-        'Preview'
+        'Preview',
     ]
 
     const [params, setParams]= useState({
