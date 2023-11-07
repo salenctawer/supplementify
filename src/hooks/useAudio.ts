@@ -9,6 +9,7 @@ const useAudio = (url: string, index: number) => {
   const previewSrc = useAppSelector((state) => state.player.recentlyPlayedPreview);
 
   const toggle = async (src: string) => {
+    playerActions.setRecentlyPlayedPreview(src);
     togglePlaying(!playing);
   };
 
@@ -50,7 +51,7 @@ const useAudio = (url: string, index: number) => {
     if (previewSrc && previewSrc !== url) {
       setPlaying(false);
     }
-  }, [playing]);
+  }, [previewSrc]);
 
   return {
     playing,

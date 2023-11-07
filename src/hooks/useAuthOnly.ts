@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export const useAuthOnly = () => {
   const router = useRouter();
-  const { isAuth } = useAuth();
+  const { isAuth, accessToken, loginData, setStoreLoginData } = useAuth();
 
   const redirectToLogin = () => {
     return router.push('/login');
@@ -15,8 +15,12 @@ export const useAuthOnly = () => {
       return;
     }
 
-    redirectToLogin();
-  }, [isAuth]);
+    if (accessToken && !loginData) {
+      return setStoreLoginData();
+    }
+
+    return redirectToLogin();
+  }, [isAuth, accessToken, loginData]);
 
   return {
     isAuth
