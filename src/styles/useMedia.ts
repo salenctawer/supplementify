@@ -1,22 +1,22 @@
-import { useMediaQuery, useTheme } from "@mui/material"
+import { useMediaQuery, useTheme } from '@mui/material';
 
 const useMedia = () => {
-    const theme = useTheme()
+  const theme = useTheme();
 
-    const mdSize = useMediaQuery(theme.breakpoints.up('md'))
+  const mdSize = useMediaQuery(theme.breakpoints.up('md'));
 
-    const lgSize = useMediaQuery(theme.breakpoints.up('lg'))
+  const lgSize = useMediaQuery(theme.breakpoints.up('lg'));
 
-    const xlSize = useMediaQuery(theme.breakpoints.up('xl'))
+  const xlSize = useMediaQuery(theme.breakpoints.up('xl'));
 
-    const smSize = useMediaQuery(theme.breakpoints.up('sm'))
+  const smSize = useMediaQuery(theme.breakpoints.up('sm'));
 
-    return {
-        smSize,
-        mdSize,
-        lgSize,
-        xlSize,
-    }
-}
+  return {
+    smSize,
+    mdSize,
+    lgSize,
+    xlSize
+  };
+};
 
-export default useMedia
+export default useMedia;

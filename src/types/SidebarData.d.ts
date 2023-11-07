@@ -1,9 +1,9 @@
-import * as MuiIcons from '@mui/icons-material'
+import * as MuiIcons from '@mui/icons-material';
 
-export type Icon = keyof typeof MuiIcons
+export type Icon = keyof typeof MuiIcons;
 
 export interface SidebarTabItemData {
-    name: string
-    routeName: string
-    icon: Icon,
+  name: string;
+  routeName: string;
+  icon: Icon;
 }

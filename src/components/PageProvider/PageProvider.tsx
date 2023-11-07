@@ -1,28 +1,27 @@
-import { useEffect } from "react"
+import React, { useEffect } from 'react';
 
-import { useRouter } from 'next/navigation'
-import { useAppSelector } from "@/redux/hooks"
-import { useAuth } from "@/hooks/useAuth"
-
-import PageContainer from "@/components/ui/PageContainer/PageContainer"
-import { useAuthOnly } from "@/hooks/useAuthOnly"
+import PageContainer from '@/components/ui/PageContainer/PageContainer';
+import { useAuthOnly } from '@/hooks/useAuthOnly';
 
 // TODO: Сделать middleware или hoc для auth only роутинга, подумать над next auth
 
-export const PageProvider = ({ children, error }: { children: React.ReactNode, error: Error | null }) => {
-    const { isAuth } = useAuthOnly()
+export const PageProvider = ({
+  children,
+  error
+}: {
+  children: React.ReactNode;
+  error: Error | null;
+}) => {
+  const { isAuth } = useAuthOnly();
 
-    useEffect(() => {
-        console.log(error)
-        if(error) {
-            throw new Error(error)
-        }
-
-    }, [error])
-
-    if(isAuth) {
-        return <PageContainer>
-        {children}
-    </PageContainer>
+  useEffect(() => {
+    console.log(error);
+    if (error) {
+      throw new Error(error);
     }
-}
+  }, [error]);
+
+  if (isAuth) {
+    return <PageContainer>{children}</PageContainer>;
+  }
+};

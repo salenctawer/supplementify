@@ -1,41 +1,35 @@
-import { useCallback } from "react"
+import { useCallback } from 'react';
 
 const useTime = () => {
-    const getLastListeningTime = useCallback((time: string) => {
-        const currentDate = new Date()
-        const playedAtDate = new Date(time)
-        
-        const lastListeningTimeMs = Math.abs(currentDate.getTime() - playedAtDate.getTime())
+  const getLastListeningTime = useCallback((time: string) => {
+    const currentDate = new Date();
+    const playedAtDate = new Date(time);
 
-        return getDuration(lastListeningTimeMs)
-    }, [])
+    const lastListeningTimeMs = Math.abs(currentDate.getTime() - playedAtDate.getTime());
 
-    const getDuration = useCallback((duration: number) => {
-        const seconds = Math.floor((duration / 1000) % 60)
-        const minutes = Math.floor((duration / 1000 / 60) % 60)
-        const hours = Math.floor((duration / 1000 / 60/ 60) % 60)
-        
-        if(minutes && seconds && hours) {
-            return `${hours}h ${minutes}m ${seconds}s`
-        }
+    return getDuration(lastListeningTimeMs);
+  }, []);
 
-        else if(minutes && seconds) {
-            return `${minutes}m ${seconds}s`
-        }
+  const getDuration = useCallback((duration: number) => {
+    const seconds = Math.floor((duration / 1000) % 60);
+    const minutes = Math.floor((duration / 1000 / 60) % 60);
+    const hours = Math.floor((duration / 1000 / 60 / 60) % 60);
 
-        else if(minutes) {
-            return `${minutes}m`
-        }
-
-        else if(seconds) {
-            return `${seconds}s`
-        }
-    }, [])
-
-    return {
-        getLastListeningTime,
-        getDuration
+    if (minutes && seconds && hours) {
+      return `${hours}h ${minutes}m ${seconds}s`;
+    } else if (minutes && seconds) {
+      return `${minutes}m ${seconds}s`;
+    } else if (minutes) {
+      return `${minutes}m`;
+    } else if (seconds) {
+      return `${seconds}s`;
     }
-}
+  }, []);
 
-export default useTime
+  return {
+    getLastListeningTime,
+    getDuration
+  };
+};
+
+export default useTime;

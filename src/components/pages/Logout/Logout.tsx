@@ -1,19 +1,16 @@
-'use client'
-
-import { FC, useEffect } from "react"
-import { useRouter } from 'next/navigation'
-import { useAuth } from "@/hooks/useAuth"
-
+'use client';
+import React from 'react';
+import { FC, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 
 export const Logout: FC = () => {
-    const { logout } = useAuth()
-    const router = useRouter()
-    
-    useEffect(() => {
-        logout()
-    })
+  const { logout } = useAuth();
 
-    return <div>Logout</div>
-}
+  useEffect(() => {
+    logout();
+  });
 
-export default Logout
+  return <div>Logout</div>;
+};
+
+export default Logout;

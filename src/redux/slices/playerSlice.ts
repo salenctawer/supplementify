@@ -1,24 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit"
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    recentlyPlayedPreview: ''
-}
+  recentlyPlayedPreview: ''
+};
 
 const playerSlice = createSlice({
-    name: 'player',
-    initialState,
-    reducers: {
-        setRecentlyPlayedPreview: (state, action) => {
-            state.recentlyPlayedPreview = action.payload
-        }
+  name: 'player',
+  initialState,
+  reducers: {
+    setRecentlyPlayedPreview: (state, action) => {
+      state.recentlyPlayedPreview = action.payload;
     }
-})
+  }
+});
 
-export const { actions: playerActions} = playerSlice
+export const { actions: playerActions } = playerSlice;
 
 export const allPlayerActions = {
-    ...playerActions
-}
+  ...playerActions
+};
 
-export default playerSlice.reducer
+export default playerSlice.reducer;
